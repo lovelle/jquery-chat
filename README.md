@@ -12,7 +12,7 @@ With some of this components -> [Jquery](http://jquery.com/), [jQuery UI](http:/
 	* Socket.io v(0.9.x) // TODO: update to socket.io v1.0
 	* Webserver (Apache, IIS, Nginx, Lighttpd, etc)
 
-**Note:**: Remember to clone the project behind a webserver, if you want to execute local file index.html it wont work.
+**Note:** Remember to clone the project behind a webserver, if you want to execute local file index.html it wont work.
 
 
 Features
