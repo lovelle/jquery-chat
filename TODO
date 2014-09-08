@@ -3,3 +3,4 @@
 3 Emoticons
 4 User custom status in main chat
 5 Actually, the date is local from javascript, get date from server.
+6 Update Socket.io v(0.9.x) to socket.io v1.0
