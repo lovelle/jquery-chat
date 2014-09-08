@@ -5,7 +5,7 @@ jquery-chat
 
 With some of this components -> [Jquery](http://jquery.com/), [jQuery UI](http://jqueryui.com/), [Node.js](http://nodejs.org/), [Socket.IO](http://socket.io/)
 
-## Prerequisites:
+### Prerequisites:
 
 	* Node.js - npm
 	* Webserver (Apache, IIS, Nginx, Lighttpd, etc)
@@ -25,15 +25,15 @@ Features
 	* Sounds 
 	* Browser support: (Opera, Firefox, Google Chrome, Safari, Internet Explorer)
 
-# Installation
+## Installation
 
-## 1. Clone the project
+### 1. Clone the project
 
 	$ cd /var/www/
 	$ git clone https://github.com/lovelle/jquery-chat
 	$ cd jquery-chat
 
-## 2. Configuration
+### 2. Configuration
 
 	# Go to cloned project
 	$ cd /var/www/jquery-chat/
@@ -42,14 +42,14 @@ Features
 	# And the same for line 11 in index.html
 	$ editor index.html
 
-## 3. Install and run Node.js
+### 3. Install and run Node.js
 
 	$ cd /var/www/jquery-chat/server
 	$ npm install
 	$ npm start
 
 
-## 4. Run
+### 4. Run
 Lets it, to finish remember you must have a webserver, if you dont want to install a full webserver you can do it with python server:
 
 	# Go to project folder
