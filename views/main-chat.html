@@ -1,0 +1,59 @@
+<div id='main-users-resizer' class='ui-widget-content ui-corner-all'>
+  <div class='ui-widget-header'>
+    <button id='min-main-chat' class='ui-button ui-state-default ui-corner-all ui-button-icon-only minimize-main' title='Minimizar'>
+      <a href='#'>
+        <span class='ui-icon ui-icon-minus'></span>
+        <span class='ui-button-text' style='float: right; padding: 2px;'>.</span>
+      </a>
+    </button>
+    <div id='chat-title'>
+    </div>
+  </div>
+
+  <div class='ui-widget'>
+    <input id='text-status' type='text' />
+  </div>
+
+  <div>
+    <div>
+      <button id='rerun'><img id='rerun-img'></button>
+      <button id='rerun-select'>.</button>
+    </div>
+    <ul id='user-status'>
+      <li id='user-status-online' class='user-status'><a class='online' style='padding-left: 15px; display: hidden;' href='#'></a></li>
+      <li id='user-status-busy' class='user-status'><a class='busy' style='padding-left: 15px; display: hidden;' href='#'></a></li>
+      <li id='user-status-offline' class='user-status'><a class='offline' style='padding-left: 15px; display: hidden;' href='#'></a></li>
+      <li id='user-status-close' class='user-status'><a class='close' style='padding-left: 15px; display: hidden;' href='#'></a></li>
+    </ul>
+  </div>
+
+  <div>
+    <span class='x-input ui-corner-all'>
+      <button id='icon-search'></button>
+      <input type='text' id='search' class='x-input-text' />
+      <button id='icon-close'></button>
+    </span>
+  </div>
+  <div id='slider'></div>
+  <div id='users'>
+    <h3>
+      <span id='users-header'></span>
+       (<span id='users-header-num'></span>)
+    </h3>
+    <div id='users-window-chat' class='slider_container'>
+      <div id='main-sort-chat' class='main-chat-window'>
+      </div>
+    </div>
+    <h3>Info</h3>
+    <div>
+      <p>Si desea reportar una incidencia acerca del chat, haga click <a href='mailto:ezequiellovelle@gmail.com?Subject=Bug%20found!'>aquí</a></p>
+    </div>
+  </div>
+    <div>Powered by <a href='mailto:ezequiellovelle@gmail.com'>me</a></div>
+</div>
+
+<audio id='audio-popup' controls style='display: none;'>
+  <source src='sounds/popup.mp3' type='audio/mpeg'>
+  <source src='sounds/popup.ogg' type='audio/ogg'>
+  <embed src='sounds/popup.mp3'>
+</audio>

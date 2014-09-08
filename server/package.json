@@ -1,0 +1,14 @@
+{
+  "name": "realtime-chat",
+  "version": "0.0.8",
+  "description": "100% JavaScript realtime chat",
+  "main": "./server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "socket.io": "0.9.x"
+  },
+  "author": "Ezequiel Lovelle <ezequiellovelle@gmail.com>",
+  "license": "MIT"
+}

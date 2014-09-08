@@ -1,0 +1,290 @@
+body {
+	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	font-size: 60%;
+	overflow: hidden;
+}
+
+.main-right, #text-status {
+	float: right;
+}
+
+.panels, .window, .apps, .shortcut {
+	float: left;
+}
+
+.apps, .shortcut {
+	position: relative;
+}
+
+.window-tab {
+	z-index: 6;
+	cursor: pointer;
+	display: block;
+	position: relative;
+	border-width: 0;
+	padding-left: 1px;
+	text-decoration: none;
+	border-left-width: 1px;
+}
+
+.highlight-padding {
+	padding: 3px;
+}
+
+.ui-menu {
+	width: 180;
+}
+
+.toolbar, .toolbar-max {
+	padding: 0px;
+	display: inline-block;
+	position: fixed;
+	bottom: 0px;
+	right: 2em;
+	float: left;
+	z-index: 50000;
+}
+
+#tools-menu {
+	min-width: 150px;
+}
+
+.toolbar-max {
+	width: 90%;
+}
+
+/* support: IE7 */
+*+html .toolbar {
+ 	display: inline;
+}
+
+.textarea-msg { 
+	/*padding-top: 0.5em;
+	padding-left: 0.5em;*/
+	font-size: 10px;
+	float: left;
+	width: 190px;
+	height: 40px;
+}
+
+.msg, .msg-text {
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 4px;
+	display: block;
+}
+
+.msg-toptext {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.msg-time {
+	float: right;
+}
+
+.msg-custom, .msg-time {
+	margin: 0px;
+	padding: 0px;
+	font-size: 80%;
+	zoom: 1;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.floater {
+	position: absolute;
+	bottom: 0px;
+}
+
+.minimize-window {
+	right: 2.4em;
+}
+
+.externally-window {
+	right: 4.9em;
+}
+
+.minimize-window, .externally-window {
+	position: absolute;
+	top: 50%;
+	width: 21px;
+	margin: -10px 0 0 0;
+	padding: 1px;
+	height: 20px;
+}
+
+.minimize-main {
+	float: right;
+	margin: 0px;
+}
+
+.online {
+	background-image: url("../images/button_online.png");
+}
+
+.busy {
+	background-image: url("../images/busy.png");
+}
+
+.away {
+	background-image: url("../images/status-away.png");
+}
+
+.offline {
+	background-image: url("../images/button_offline.png");
+}
+
+.close {
+	background-image: url("../images/button_offline.png");
+}
+
+.online, .busy, .away, .offline, .close {
+	background-repeat: no-repeat;
+	display: inline;
+	background-position: 0px 2px;
+	padding-left: 15px;
+}
+
+.ui-chatbox-log {
+	min-height: 100px;
+	max-height: 185px;
+	overflow-y: auto;
+}
+
+.ui-chatbox-input-box {
+	border: 2px solid lightgrey;
+	margin-bottom: 1.3em;
+	overflow-y: auto;
+}
+
+.ui-chatbox-input-focus {
+	border-color: #6699FF;
+}
+
+.warning-conection {
+	position: absolute;
+	float: left;
+	width: 79%;
+}
+
+.chat-main-title {
+	text-align: center;
+	margin: 0.3em;
+	font-size: 1.1em;
+}
+
+#main-users-resizer {
+	width: 200px;
+	min-height: 200px;
+	display: inline-block;
+	position: fixed;
+	z-index: 50000;
+}
+
+.main-chat-window {
+	margin-left: -2em;
+}
+
+.user-pad {
+	padding: 5px;
+}
+
+#text-status {
+	margin-top: 3px;
+	font-size: 9px;
+	width: 68%;
+	text-align: left;
+	background-image: url("../images/mini-comment.png");
+	background-repeat: no-repeat;
+	display: inline;
+	background-position: 2px 5px;
+	padding-left: 15px;
+	padding-top: 3px;
+}
+
+#user-status {
+	z-index: 1;
+	position: fixed;
+	list-style-image: none;
+	list-style: none;
+}
+
+.progress-label {
+	float: left;
+	margin-left: 30%;
+	margin-top: 5px;
+	font-weight: bold;
+	text-shadow: 1px 1px 0 #fff;
+}
+
+.ui-dialog {
+	display: inline-block;
+	position: fixed;
+	z-index: 50000;
+}
+
+#tools-panel, .no-display {
+	display: none;
+}
+
+#progressbar-char {
+	width: 55px;
+	float: left;
+    margin-top: 1.2em;
+    margin-bottom: 0.4em;
+    height: 6px;
+}
+
+#istalking {
+	list-style-image: none;
+	list-style: none;
+	font-size: 9px;
+	margin-top: 1em;
+	float: left;
+}
+
+#options-panel {
+	padding: 0px;
+	border: 1px solid lightgrey;
+}
+
+#format {
+	padding: 4px;
+	overflow-y: auto;
+}
+
+.x-input {
+	border: 1px solid #ccc;
+	padding-top: 4px;
+	padding-bottom: 2px;
+}
+
+.x-input input.x-input-text {
+	border: 0;
+	outline: 0;
+	width: 70%;
+}
+
+#icon-close, #icon-search {
+	margin-right: 0px;
+	margin-bottom: 5px;
+	width: 20px;
+	height: 20px;
+}
+
+#slider {
+	float: right;
+	margin-top: 30px;
+}
+
+.validateTips {
+	border: 1px solid transparent;
+	padding: 0.3em;
+}
+
+input.login_text {
+	margin-bottom:12px;
+	width:95%;
+	padding: .4em;
+}
