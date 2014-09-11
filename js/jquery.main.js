@@ -1418,11 +1418,19 @@ $(function() {
       }
     }
   });
-  //append icon to handle
-  //var handleHelper = scrollbar.find( ".ui-slider-handle" )
-  //.append( "<span class='ui-icon ui-icon-grip-dotted-vertical'></span>" )
-  //.wrap( "<div class='ui-handle-helper-parent'></div>" ).parent();
 
-  //change overflow to hidden now that slider handles the scrolling
-  //scrollPane.css( "overflow", "hidden" );
+  function displayChatOnload() {
+    document.getElementById('main').style.display = 'block';
+    document.getElementById('options-panel').style.display = 'block';
+    //PEND: add parent div, otherwise the main chat not shown by its own
+    //document.getElementById('main-users-resizer').style.display = 'block';
+  }
+
+  // Check for browser support of event handling capability
+  if (window.addEventListener)
+    window.addEventListener('load', displayChatOnload, false);
+  else if (window.attachEvent)
+    window.attachEvent('onload', displayChatOnload);
+  else window.onload = displayChatOnload;
+
 });
