@@ -302,7 +302,7 @@ $(function() {
   });
   
   //Custom message
-  //PEND: Put in the init
+  //TODO: Put in the init
   var text_status = i18n.custom_message;
   var text_custom_msg = "";
   var text_custom_msg_last;
@@ -420,7 +420,7 @@ $(function() {
       socket_connect();
       socket_handle();
       
-      //PEND: alert( "do init connection" );
+      //TODO: alert( "do init connection" );
       //if connection was 'ok' then append the main chat
       //if connection was 'ok' then change chat title bar to online
     }
@@ -479,7 +479,7 @@ $(function() {
       label  = i18n.offline;
     }
 
-    //PEND: change image
+    //TODO: change image
     else if ( id == "user-status-close" ) {
       main_chat_disconnect();
       return true;
@@ -625,7 +625,6 @@ $(function() {
               append_msg_me ( msg, main );
               socket.emit('message', { 'user': user, 'msg': msg });//'user' variable is the destination user
             }
-            //console.log( "escribiendo msg" );
             return false;
           });
 
@@ -649,7 +648,7 @@ $(function() {
   //Socket emit send data
   function user_status ( action, data ) {
     console.log( action + " " + data );
-    // PEND: user_status_msg
+    // TODO: user_status_msg
     if (action == 'user_status')
       socket.emit('user_status', { 'status': data });
   }
@@ -742,7 +741,7 @@ $(function() {
 
   function main_chat_status ( text , status ) {
 
-    //PEND:
+    //TODO:
     //if was discconected, do reconnect
     if ( chat_reconnect == 1 ) {
       console.log("doing reconnect")
@@ -807,7 +806,6 @@ $(function() {
     //if ( has scroll )
     //BUG!!!
     var height = 180 - $( "#Dialog" + id ).parent().find( "#warning" ).height() - 2;
-    //console.log( $( "#Dialog" + id ).parent().find( "#box" ).height() );
     //Now the height of the box is smaller
     $( "#Dialog" + id ).parent().find( "#box" ).first().css( "max-height", height );
 
@@ -1144,7 +1142,7 @@ $(function() {
     if ( $( "#options-panel" ).dialog( "isOpen" ) == true )
       $( "#options-panel" ).dialog( "widget" ).position({ my: "right bottom", at: "right top", collision: "flip, none", of: "#main"  });
 
-    //PEND: change position of all chat dialog opened
+    //TODO: change position of all chat dialog opened
   }
 
   function main_chat_user_alert ( id, action ) {
@@ -1233,7 +1231,7 @@ $(function() {
     });
 
     socket.on('reconnecting', function ( data ) {
-      //PEND: do something
+      //TODO: do something
       // Main chat title, add the loading bar and text
       //main_chat_title( 2 );
     });
@@ -1283,7 +1281,7 @@ $(function() {
       var main   = $( "#Dialog" + iduser );
 
       //Do nothing if user is offline
-      // PEND:
+      // TODO:
       /*if ( status == 'offline' )
         return false;*/
       //Append div user in the bar if is not appended
@@ -1295,7 +1293,7 @@ $(function() {
       //Check focus state and focus document to do sound and alert
       if( !$(document).is(document.activeElement) || !main.find( "#textarea_msg" ).is(document.activeElement) ) {
         //Do sound effect
-        //PEND: if sounds has been disabled, dont do it
+        //TODO: if sounds has been disabled, dont do it
         if ( conf_sound_active == true )
           $( "#audio-popup" ).trigger( "play" );
 
@@ -1307,8 +1305,6 @@ $(function() {
     }
 
     else if ( action == 'newuser' ) {
-      //console.log('new user newuser');
-      
       //Append the Dialogid
       main_append_dialog( recv.user.uid, recv.user.user );
       main_set_dialog( recv.user.uid, recv.user.user);
@@ -1318,21 +1314,18 @@ $(function() {
     }
 
     else if ( action == 'disconnect' ) {
-      //console.log('new user disconnect');
       //Delete the user to chat
       main_chat_user_delete( recv.user.uid );
     }
 
     else if ( action == 'offline' ) {
-      //console.log('new user offline');
       //Set offline the user in chat
       main_chat_user_offline( recv.user.uid );
     }
 
     else if ( action == 'user_status' ) {
-      //console.log('new user usrstatus');
-      //PEND: if user goes to offline, set the 'popup disable'
-      //PEND: if user comes from offline and is set 'popup disable', enable it
+      //TODO: if user goes to offline, set the 'popup disable'
+      //TODO: if user comes from offline and is set 'popup disable', enable it
       /*if (recv.user.status == 'offline')
         main_chat_user_offline( recv.user.uid );
       else
@@ -1341,7 +1334,6 @@ $(function() {
     }
 
     else if ( action == 'usrlist' ) {
-      //console.log('new user usrlist');
       for (i in recv.user) {
 
         //Append the Dialogid
@@ -1380,9 +1372,6 @@ $(function() {
   $( "#i18n" ).change(function() {
     var i18n_js = "i18n_" + $( this ).val() + ".js"
     $.getScript( i18n_js , function(data, textStatus, code) {
-      //console.log( data ); //data returned
-      //console.log( textStatus ); //success
-      //console.log( code.status ); //200
       main_set_i18n();
       $( "#format" ).buttonset( "destroy" ).buttonset();//Set the button style for sounds
       //Close all
@@ -1421,8 +1410,6 @@ $(function() {
     orientation: "vertical",
     value: 0,
     slide: function (event, ui) {
-      console.log(ui.value);
-      console.log(scrollPane.height());
       if (scrollContent.height() > scrollPane.height()) {
         scrollContent.css("margin-top", (-1 * (scrollPane.height() - ((scrollPane.height() * ui.value) / 100))) + "px");
 
