@@ -2,6 +2,8 @@ jquery-chat
 ===========
 
 100% pure javascript realtime chat (client and server) facebook/gmail style web chat.
+jQuery Chat allows webmasters/developers to add a fully-working chat room on top of their site, 
+see 'index.html' as an example.
 
 With some of this components -> [Jquery](http://jquery.com/), [jQuery UI](http://jqueryui.com/), [Node.js](http://nodejs.org/), [Socket.IO](http://socket.io/)
 
