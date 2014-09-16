@@ -4,4 +4,4 @@
 4 User custom status in main chat
 5 Actually, the date is local from javascript, get date from server.
 6 Update Socket.io v(0.9.x) to socket.io v1.0
-7 Add setting 'lang_default' for language setting in 'config.js'
+DONE 7 Add setting 'lang_default' for language setting in 'config.js'

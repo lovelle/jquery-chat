@@ -30,6 +30,7 @@ $(function() {
   conf_bar_icon_collapse,
   conf_theme_default,
   conf_themes,
+  conf_lang_default,
   conf_lang_text,
   conf_lang_i18n,
   conf_shortcuts_text,
@@ -68,7 +69,10 @@ $(function() {
 
     //Lang for options
     for ( var i = 0; i < conf["lang"].length; i++ )
-      $( "#i18n" ).append( "<option value='" + conf_lang_i18n[i] + "'>" + conf_lang_text[i] + "</option>" );
+      if (conf_lang_i18n[i] == conf["lang_default"])
+        $( "#i18n" ).append( "<option value='" + conf_lang_i18n[i] + "' selected='selected'>" + conf_lang_text[i] + "</option>" );
+      else
+        $( "#i18n" ).append( "<option value='" + conf_lang_i18n[i] + "'>" + conf_lang_text[i] + "</option>" );
   }
 
   //Main chat title bar
@@ -1066,6 +1070,7 @@ $(function() {
       conf_bar_icon_expand = conf["bar"]["icon_expand"];
       conf_bar_icon_collapse = conf["bar"]["icon_collapse"];
       conf_theme_default = conf["theme_default"];
+      conf_lang_default = conf["lang_default"];
       conf_themes = new Array();
       conf_lang_text = new Array();
       conf_lang_i18n = new Array();

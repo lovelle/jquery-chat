@@ -55,6 +55,7 @@ var conf =
         { name: 'vader' }
     ],
 
+    lang_default: 'en', //Default selected lang in 'options', for change current language go to script tag in 'index.html'.
     lang:
     [
         {
