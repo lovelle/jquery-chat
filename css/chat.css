@@ -1,6 +1,5 @@
 body {
 	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
-	font-size: 60%;
 	overflow: hidden;
 }
 
@@ -25,6 +24,7 @@ body {
 	padding-left: 1px;
 	text-decoration: none;
 	border-left-width: 1px;
+	font-size: 60%;
 }
 
 .highlight-padding {
@@ -180,6 +180,7 @@ body {
 	display: inline-block;
 	position: fixed;
 	z-index: 50000;
+	font-size: 60%;
 }
 
 .main-chat-window {
@@ -222,6 +223,7 @@ body {
 	display: inline-block;
 	position: fixed;
 	z-index: 50000;
+	font-size: 60%;
 }
 
 #tools-panel, .no-display {
