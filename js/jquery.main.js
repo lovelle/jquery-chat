@@ -270,7 +270,6 @@ $(function() {
     var iduser = $( this ).attr( "id" ).substring( (prefix.length) );
     var name   = $( this ).text();
 
-    // caca
     // Del notification if exist
     main_chat_user_alert( iduser, 1 );
 
@@ -354,7 +353,7 @@ $(function() {
     if ( $( "#users-button-bar" ).parent().find( "#user-button-" + iduser ).length == 0 ) {
       var name = $( this ).text();
       var stat = $( this ).find( "li" ).attr( "class" );
-      $( "#users-button-bar" ).append( "<button id='user-button-" + iduser + "' class='user-button'><li class='" + stat + "'>" + name + "</li></button>" );
+      $( "#users-button-bar" ).append( "<button id='user-button-" + iduser + "' class='user-button' style='font-size: 65%;'><li class='" + stat + "'>" + name + "</li></button>" );
       $( ".user-button" ).button();
     }
 
@@ -1291,7 +1290,7 @@ $(function() {
         return false;*/
       //Append div user in the bar if is not appended
       if ( $( "#users-button-bar" ).parent().find( "#user-button-" + iduser ).length == 0 ) {
-        $( "#users-button-bar" ).append( "<button id='user-button-" + iduser + "' class='user-button'><li class='" + status + "'>" + name + "</li></button>" );
+        $( "#users-button-bar" ).append( "<button id='user-button-" + iduser + "' class='user-button' style='font-size: 65%;'><li class='" + status + "'>" + name + "</li></button>" );
         $( ".user-button" ).button();
       }
 

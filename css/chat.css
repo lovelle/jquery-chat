@@ -24,7 +24,7 @@ body {
 	padding-left: 1px;
 	text-decoration: none;
 	border-left-width: 1px;
-	font-size: 60%;
+	font-size: 65%;
 }
 
 .highlight-padding {
@@ -180,7 +180,7 @@ body {
 	display: inline-block;
 	position: fixed;
 	z-index: 50000;
-	font-size: 60%;
+	font-size: 65%;
 }
 
 .main-chat-window {
@@ -223,7 +223,7 @@ body {
 	display: inline-block;
 	position: fixed;
 	z-index: 50000;
-	font-size: 60%;
+	font-size: 65%;
 }
 
 #tools-panel, .no-display {
