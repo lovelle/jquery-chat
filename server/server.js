@@ -1,4 +1,4 @@
-var port = 3000, //Listen port
+var port = 443, //Listen port
 server   = require('http').createServer(),
 io       = require('socket.io').listen(server),
 
