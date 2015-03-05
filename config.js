@@ -2,8 +2,8 @@ var conf =
 {
     domain: 'domain.ltd',
     server_type: 'socket.io',
-    server: 'localhost',
-    port: '443',
+    server: 'jquery-chat.herokuapp.com',
+    port: '80',
     debug: true,
     auto_login: false,
     sound_active: true,

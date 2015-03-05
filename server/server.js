@@ -1,4 +1,4 @@
-var port = 443, //Listen port
+var port = process.env.PORT || 3000;
 server   = require('http').createServer(),
 io       = require('socket.io').listen(server),
 
@@ -64,4 +64,7 @@ io.sockets.on('connection', function (socket) {
 });
 
 //Listen to the server port
-server.listen(port)
+server.listen(port, function () {
+  var addr = server.address();
+  console.log('jquery-chat server listening and ready');
+});
