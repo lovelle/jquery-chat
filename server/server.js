@@ -47,6 +47,12 @@ io.sockets.on('connection', function (socket) {
 		socket.broadcast.emit('chat', JSON.stringify( {'action': 'user_status', 'user': users[socket.user]} ));
 	});
 
+	// Event received when user is typing
+	socket.on('user_typing', function (recv) {
+		var id  = socks[recv.user].socket.id;
+		io.sockets.socket(id).emit('chat', JSON.stringify( {'action': 'user_typing', 'data': users[socket.user]} ));
+	});
+
 	// Event received when user send message to another
 	socket.on('message', function (recv) {
 		var id  = socks[recv.user].socket.id;
