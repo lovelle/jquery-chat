@@ -26,7 +26,7 @@ var i18n =
 	close_session:'Close session',
 	open_session:'Login',
 	char_max:'characters max',
-	is_writing:'is writing',
+	is_writing:'is typing',
 	alert:'Alert!',
 	user_is:'This user is',
 	theme:'Theme',
