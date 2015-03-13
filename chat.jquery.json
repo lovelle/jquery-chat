@@ -3,16 +3,18 @@
     "title": "jQuery Chat",
     "description": "100% pure javascript realtime chat (client and server) facebook/gmail style web chat.",
     "keywords": [
-	"javascript",
-        "chat",
-        "html5",
-	"websocket",
-	"realtime"
+    "javascript",
+    "chat",
+    "html5",
+    "websocket",
+    "jquery",
+    "realtime"
     ],
-    "version": "1.0.1",
+    "version": "1.2.1",
     "author": {
         "name": "Ezequiel Lovelle",
-        "url": "https://github.com/lovelle/jquery-chat"
+        "email": "ezequiellovelle@gmail.com",
+        "url": "http://jquery-chat.net"
     },
     "maintainers": [
         {
@@ -28,7 +30,7 @@
         }
     ],
     "bugs": "https://github.com/lovelle/jquery-chat/issues",
-    "homepage": "https://github.com/lovelle/jquery-chat",
+    "homepage": "http://jquery-chat.net",
     "docs": "https://github.com/lovelle/jquery-chat",
     "download": "https://github.com/lovelle/jquery-chat/archive/master.zip",
     "dependencies": {
