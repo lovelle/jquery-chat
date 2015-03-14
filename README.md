@@ -1,4 +1,4 @@
-jquery-chat
+# [jquery-chat](http://jquery-chat.net/)
 ===========
 
 100% pure javascript realtime chat (client and server) facebook/gmail style web chat.
@@ -6,12 +6,15 @@ jquery-chat
 The jQuery Chat plugin can be used to add a JavaScript-based chatting system to your site, 
 allows webmasters/developers to add a fully-working chat room on top of their site, see 'index.html' as an example.
 
-With some of this components -> [Jquery](http://jquery.com/), [Node.js](http://nodejs.org/), [Socket.IO](http://socket.io/)
+Built with these components -> [Jquery](http://jquery.com/), [Node.js](http://nodejs.org/), [Socket.IO](http://socket.io/)
 
-### Prerequisites:
+**Note:** By default the chat is configured to use an existing [Heroku app](http://jquery-chat.herokuapp.com/socket.io), so you will not need to install Node and npm.
+(Skip step 3 in the installation process)
 
-	* Node.js - npm
-	* Webserver (Apache, IIS, Nginx, Lighttpd, etc)
+## Getting Started:
+
+* [Install](https://docs.npmjs.com/getting-started/installing-node) Node.js and npm
+* Use any Webserver (Apache, IIS, Nginx, Lighttpd, etc)
 
 **Note:** Remember to clone the project behind a webserver, if you want to execute local file index.html it wont work.
 
@@ -60,3 +63,8 @@ Lets it, to finish remember you must have a webserver, if you dont want to insta
 	$ python -m SimpleHTTPServer
 
 Finish!, go to visit http://localhost:8000/
+
+
+## License
+
+See [LICENSE](https://github.com/lovelle/jquery-chat/blob/master/LICENSE).
