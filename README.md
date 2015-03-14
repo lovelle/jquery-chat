@@ -1,5 +1,4 @@
 # [jquery-chat](http://jquery-chat.net/)
-===========
 
 100% pure javascript realtime chat (client and server) facebook/gmail style web chat.
 
