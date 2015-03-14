@@ -2,7 +2,7 @@
 // (c) 2013-2014 Ezequiel Lovelle [ezequiellovelle@gmail.com]
 // released under the MIT license
 
-$(function() {
+(function( $ ) {
   
   var chat_stat = 0,
   chat_reconnect = 0,
@@ -1458,4 +1458,4 @@ $(function() {
     */
   });
 
-});
+}( jQuery ));
