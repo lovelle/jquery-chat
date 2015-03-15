@@ -492,7 +492,7 @@
       }
 
       //TODO: change image
-      else if ( id == "user-status-close" ) {
+      else if ( id == "user-status-logout" ) {
         main_chat_disconnect();
         return true;
       }
@@ -975,7 +975,7 @@
       $( "#user-status-online" ).find( "a" ).first().text( i18n.online );
       $( "#user-status-busy" ).find( "a" ).first().text( i18n.busy );
       $( "#user-status-offline" ).find( "a" ).first().text( i18n.offline );
-      $( "#user-status-close" ).find( "a" ).first().text( i18n.close_session );
+      $( "#user-status-logout" ).find( "a" ).first().text( i18n.close_session );
       $( "#dialog-login" ).attr( "title", i18n.login );
       $( "#dialog-login" ).find( "p" ).first().text( i18n.all_fields_required );
       $( "#dialog-login" ).find( "label#label_name" ).text( i18n.name );

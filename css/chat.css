@@ -135,11 +135,11 @@ body {
 	background-image: url("../images/button_offline.png");
 }
 
-.close {
+.logout {
 	background-image: url("../images/button_offline.png");
 }
 
-.online, .busy, .away, .offline, .close {
+.online, .busy, .away, .offline, .logout {
 	background-repeat: no-repeat;
 	display: inline;
 	background-position: 0px 2px;
