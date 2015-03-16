@@ -2,6 +2,8 @@
 
 100% pure javascript realtime chat (client and server) facebook/gmail style web chat.
 
+To see demo please visit [jquery-chat.net](http://jquery-chat.net)
+
 The jQuery Chat plugin can be used to add a JavaScript-based chatting system to your site, 
 allows webmasters/developers to add a fully-working chat room on top of their site, see 'index.html' as an example.
 
