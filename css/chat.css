@@ -168,6 +168,10 @@ body {
 	width: 79%;
 }
 
+#chat-title-button {
+	min-width: 120px;
+}
+
 .chat-main-title {
 	text-align: center;
 	margin: 0.3em;
