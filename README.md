@@ -12,6 +12,27 @@ Built with these components -> [Jquery](http://jquery.com/), [Node.js](http://no
 **Note:** By default the chat is configured to use an existing [Heroku app](http://jquery-chat.herokuapp.com/socket.io), so you will not need to install Node and npm.
 (Skip step 3 in the installation process)
 
+
+## Usage:
+
+You need to call the next set of scripts in your own site
+If you have already loaded jQuery or UI there is no need to include them
+
+```html
+<link id='theme' rel='stylesheet' />
+<link rel='stylesheet' href='css/tipsy.css' />
+<link rel='stylesheet' href='css/chat.css' />
+
+<script src='https://jquery-chat.herokuapp.com/socket.io/socket.io.js'></script>
+<script src='js/jquery-1.11.2.min.js'></script>
+<script src='js/jquery-ui-1.10.4.custom.min.js'></script>
+<script src='js/jquery.tipsy.js'></script>
+<script src='js/jquery.main.js'></script>
+<script src='config.js'></script>
+<script src='i18n_en.js'></script>
+```
+
+
 ## Getting Started:
 
 * [Install](https://docs.npmjs.com/getting-started/installing-node) Node.js and npm
