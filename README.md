@@ -15,8 +15,8 @@ Built with these components -> [Jquery](http://jquery.com/), [Node.js](http://no
 
 ## Usage:
 
-You need to call the next set of scripts in your own site
-If you have already loaded jQuery or UI there is no need to include them
+You need to call the next set of scripts in your own site.
+If you have already loaded jQuery or UI there is no need to include them.
 
 ```html
 <link id='theme' rel='stylesheet' />
