@@ -13,6 +13,19 @@ Built with these components -> [Jquery](http://jquery.com/), [Node.js](http://no
 (Skip step 3 in the installation process)
 
 
+Features
+
+	* Multi themes support (jquery-ui)
+	* 100% javascript (client and server side)
+	* Configuration file (fancy things and connecting stuff)
+	* Support multiple languages
+	* New message pop-up notifications
+	* Multi users chat
+	* Search users
+	* Sounds 
+	* Browser support: (Opera, Firefox, Google Chrome, Safari, Internet Explorer)
+
+
 ## Usage:
 
 You need to call the next set of scripts in your own site.
@@ -40,17 +53,6 @@ If you have already loaded jQuery or UI there is no need to include them.
 
 **Note:** Remember to clone the project behind a webserver, if you want to execute local file index.html it wont work.
 
-Features
-
-	* Multi themes support (jquery-ui)
-	* 100% javascript (client and server side)
-	* Configuration file (fancy things and connecting stuff)
-	* Support multiple languages
-	* New message pop-up notifications
-	* Multi users chat
-	* Search users
-	* Sounds 
-	* Browser support: (Opera, Firefox, Google Chrome, Safari, Internet Explorer)
 
 ## Installation
 
