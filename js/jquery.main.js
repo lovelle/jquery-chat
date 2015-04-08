@@ -1,5 +1,5 @@
 // A 100% javascript facebook/gmail style web chat.
-// (c) 2013-2014 Ezequiel Lovelle [ezequiellovelle@gmail.com]
+// (c) 2014-2015 Ezequiel Lovelle [ezequiellovelle@gmail.com]
 // released under the MIT license
 
 (function( $ ) {
