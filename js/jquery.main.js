@@ -827,8 +827,10 @@
       //Disable send msg
       $( "#Dialog" + id ).parent().find( "#textarea_msg" ).first().attr( "disabled", "disabled" );
 
+      //Change li status to offline
+      main_chat_user_status( id, "offline" );
+
       $( "#main-sort-chat" ).find( "#user-"+id ).remove();
-      $( "#user-button-" + id ).remove();
 
       //Decrease total number of current users
       main_chat_users_num( 1, 0 );
