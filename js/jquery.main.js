@@ -819,6 +819,29 @@
       $( "#main-users-resizer" ).position({ my: "right bottom", at: "right top", of: "#main", collision: "flip, none" });
     }
 
+    // Delete the user in main chat, but in message box, 
+    // you must be able to read the conversation
+    function main_chat_user_offline_new ( id ) {
+      //Display warning
+      $( "#Dialog" + id ).parent().find( "#warning" ).first().removeClass( "no-display" );
+      //Disable send msg
+      $( "#Dialog" + id ).parent().find( "#textarea_msg" ).first().attr( "disabled", "disabled" );
+
+      $( "#main-sort-chat" ).find( "#user-"+id ).remove();
+      $( "#user-button-" + id ).remove();
+
+      //Decrease total number of current users
+      main_chat_users_num( 1, 0 );
+
+      //Add label of no users connected
+      if ( chat_num_users == 0 )
+        if ( $( "#chat-main-title-label" ).length == 0 )
+          $( "#main-sort-chat" ).append( "<div id='chat-main-title-label'>" + i18n.no_users + "</div>" );
+
+      //Decrease total chat main heigh for the new user
+      main_chat_set_position( 2 );
+    }
+
     function main_chat_user_offline ( id ) {
       //Display warning
       $( "#Dialog" + id ).parent().find( "#warning" ).first().removeClass( "no-display" );
@@ -1316,7 +1339,8 @@
 
       else if ( action == 'disconnect' ) {
         //Delete the user to chat
-        main_chat_user_delete( recv.user.uid );
+        //main_chat_user_delete( recv.user.uid );
+        main_chat_user_offline_new( recv.user.uid );
       }
 
       else if ( action == 'offline' ) {
