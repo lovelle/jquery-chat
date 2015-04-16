@@ -198,7 +198,7 @@ body {
 #text-status {
 	margin-top: 3px;
 	font-size: 9px;
-	width: 68%;
+	width: 66%;
 	text-align: left;
 	background-image: url("../images/mini-comment.png");
 	background-repeat: no-repeat;
@@ -272,17 +272,17 @@ body {
 	width: 70%;
 }
 
-.main-search {
+.chat-search-main {
 	padding-top: 4px;
 	padding-bottom: 2px;
 }
 
-#icon-close, #icon-search {
+#chat-icon-close, #chat-icon-search {
 	min-width: 20px;
 	min-height: 24px;
 }
 
-.input-text-search {
+.chat-search-text-st {
 	max-width: 140px;
 }
 
@@ -301,3 +301,4 @@ input.login_text {
 	width:95%;
 	padding: .4em;
 }
+
