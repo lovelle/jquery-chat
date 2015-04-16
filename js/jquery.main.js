@@ -379,12 +379,14 @@
       },
       text: false
     });
-    $( "#icon-close" ).button({
-      icons: {
-        primary: "ui-icon-close"
-      },
-      text: false
-    });
+    $( "#search" ).button()
+      .next()
+        .button({
+          text: false,
+          icons: {
+            primary: "ui-icon-close"
+          }
+        }).parent().buttonset();
 
     //Search the user
     $( "#search" ).keyup(function() {
