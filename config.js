@@ -65,6 +65,10 @@ var conf =
         {
             text: 'English',
             i18n: 'en'
+        },
+        {
+            text: 'French',
+            i18n: 'fr'
         }
     ],
 
