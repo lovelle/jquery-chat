@@ -92,3 +92,7 @@ Finish!, go to visit http://localhost:8000/
 ## License
 
 See [LICENSE](https://github.com/lovelle/jquery-chat/blob/master/LICENSE).
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/lovelle/jquery-chat/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
