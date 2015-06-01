@@ -148,7 +148,7 @@ body {
 
 .ui-chatbox-log {
 	min-height: 100px;
-	max-height: 185px;
+	max-height: 200px;
 	overflow-y: auto;
 }
 
@@ -245,7 +245,7 @@ body {
 #istalking {
 	list-style-image: none;
 	list-style: none;
-	font-size: 9px;
+	font-size: 10px;
 	margin-top: 1em;
 	float: left;
 }

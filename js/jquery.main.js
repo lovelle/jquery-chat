@@ -829,6 +829,12 @@
       //Disable send msg
       $( "#Dialog" + id ).parent().find( "#textarea_msg" ).first().attr( "disabled", "disabled" );
 
+      //if ( has scroll )
+      //BUG!!!
+      var height = 180 - $( "#Dialog" + id ).parent().find( "#warning" ).height() - 2;
+      //Now the height of the box is smaller
+      $( "#Dialog" + id ).parent().find( "#box" ).first().css( "max-height", height );
+
       //Change li status to offline
       main_chat_user_status( id, "offline" );
 
