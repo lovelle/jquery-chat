@@ -55,7 +55,6 @@
   });
 
   $.when( xhr_dlogin, xhr_toolbar, xhr_mchat, xhr_options ).done(function(r1, r2, r3, r4) {
-    //console.log('succeeds');
 
     main_set_conf();
     main_set_i18n();
@@ -553,7 +552,7 @@
     function main_chat_set_dialog_lang ( dialogid ) {
       dialogid.parent().find( "#warning-alert" ).text( i18n.alert + " " );//Set text 'alert'
       dialogid.parent().find( "#warning-text" ).text( i18n.user_is + " " + i18n.disconnected.toLowerCase() );//Set text 'user is offline'
-      dialogid.parent().find( "#istalking-text" ).first().text( clean_name( dialogid.data( "name" ) ) + " " + i18n.is_writing );//Set text 'is talkin...' 
+      dialogid.parent().find( "#iswriting-text" ).first().text( clean_name( dialogid.data( "name" ) ) + " " + i18n.is_writing );//Set text 'is writing...' 
       dialogid.parent().find( ".minimize-window" ).attr( "title", i18n.minimize );
       dialogid.dialog( { closeText: i18n.close } );
       chat_changed_lang = false;
@@ -567,10 +566,10 @@
         closeOnEscape: true,
         resizable: false,
         modal: false,
-        minHeight: 300,
+        minHeight: 200,
         maxHeight: 300,
         height: "auto",
-        width: 220,
+        width: 280,
 
         open: function(event, ui) {
 
@@ -593,8 +592,8 @@
             //Boton online
             $( this ).parent().find( ".ui-dialog-title" ).append( "<li id='dialog-status' class='" + $( this ).data( "status" ) + "'>" + $( this ).data( "name" ) + "</li>" );
 
-            //Set hide 'is talkin...'
-            $( this ).parent().find( "#istalking" ).first().addClass( "no-display" );
+            //Set hide 'is writing...'
+            $( this ).parent().find( "#iswriting" ).first().addClass( "no-display" );
 
             //Change flag at init option
             $( this ).data( "init", 1 );
@@ -671,7 +670,6 @@
 
     //Socket emit send data
     function user_status ( action, data ) {
-      console.log( action + " " + data );
       // TODO: user_status_msg
       if (action == 'user_status')
         socket.emit('user_status', { 'status': data });
@@ -764,11 +762,9 @@
     }
 
     function main_chat_status ( text , status ) {
-
       //TODO:
       //if was discconected, do reconnect
       if ( chat_reconnect == 1 ) {
-        console.log("doing reconnect")
         socket_reconnect();
       }
 
@@ -923,6 +919,11 @@
 
     function main_append_dialog ( id, user ) {
       if ( $( "#Dialog" + id ).length == 0 ) {
+        /*var xhr_dialog_box = $.get( "views/new-dialog.html", function( dialog_box ) {
+          $( "body" ).append( dialog_box );
+        });*/
+
+        /*
         $( "body" ).append( "\
           <div id='Dialog" + id + "' title='' user='" + user + "'>\
             <div id='warning' class='highlight-padding ui-state-highlight ui-corner-all no-display'>\
@@ -939,6 +940,72 @@
                 <div id='istalking'><li><span class='ui-icon ui-icon-comment window'></span><span id='istalking-text'></span></li></div>\
                 <textarea id='textarea_msg' class='textarea-msg ui-chatbox-input-box ui-corner-all ui-chatbox-input-focus'></textarea>\
               </span>\
+            </div>\
+          </div>");
+          */
+
+        $( "body" ).append( "\
+          <div id='Dialog" + id + "' title='' user='" + user + "'>\
+            <div class='box box-info direct-chat direct-chat-info'>\
+              <div class='box-header with-border'>\
+                <h3 class='box-title'>" + user + "</h3>\
+                <div class='box-tools pull-right'>\
+                  <span data-toggle='tooltip' title='3 New Messages' class='badge bg-blue'>3</span>\
+                  <button class='btn btn-box-tool' data-toggle='tooltip' title='Contacts' data-widget='chat-pane-toggle'><i class='fa fa-comments'></i></button>\
+                </div>\
+              </div>\
+              <div id='warning' class='highlight-padding ui-state-highlight ui-corner-all no-display'>\
+                <span class='window ui-icon ui-icon-info'></span>\
+                <strong id='warning-alert'></strong><span id='warning-text'></span>\
+              </div>\
+              <!--<div class='callout callout-warning no-display'>\
+                <i class='fa fa-info'> </i>\
+                <span id='warning-text'> Esta usuario esta desconectado</span>\
+              </div>-->\
+              <div class='box-body'>\
+                <div class='direct-chat-messages'>\
+                  <div class='direct-chat-msg'>\
+                    <div class='direct-chat-info clearfix'>\
+                      <span class='direct-chat-name pull-left'>Alexander Pierce</span>\
+                      <span class='direct-chat-timestamp pull-right'>23 Jan 2:00 pm</span>\
+                    </div>\
+                    <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar04.png' alt='message user image' />\
+                    <div class='direct-chat-text'>\
+                    Is this template really for free? That's unbelievable!\
+                    </div>\
+                  </div>\
+                  <div class='direct-chat-msg right'>\
+                    <div class='direct-chat-info clearfix'>\
+                      <span class='direct-chat-name pull-right'>Sarah Bullock</span>\
+                      <span class='direct-chat-timestamp pull-left'>23 Jan 2:05 pm</span>\
+                    </div>\
+                    <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar5.png' alt='message user image' />\
+                    <div class='direct-chat-text'>\
+                      You better believe it!\
+                    </div>\
+                  </div>\
+                </div>\
+                <div class='direct-chat-contacts'>\
+                  <ul class='contacts-list'>\
+                    <li>\
+                      <a href='#'>\
+                        <img class='contacts-list-img' src='templates/AdminLTE/dist/img/avatar04.png' alt='Contact Avatar'/>\
+                        <div class='contacts-list-info'>\
+                          <span class='contacts-list-name'>\
+                            Count Dracula\
+                            <small class='contacts-list-date pull-right'>2/28/2015</small>\
+                          </span>\
+                          <span class='contacts-list-msg'>How have you been? I was...</span>\
+                        </div>\
+                      </a>\
+                    </li>\
+                  </ul>\
+                </div>\
+              </div>\
+              <div id='iswriting'><i class='fa fa-pencil'></i><small id='iswriting-text'></small></div>\
+              <div class='box-footer'>\
+                <textarea id='textarea_msg' class='form-control' name='message' placeholder='Type Message ...'></textarea>\
+              </div>\
             </div>\
           </div>");
       }
@@ -1362,12 +1429,12 @@
         var userid = recv.data.uid;
         var main = $( "#Dialog" + userid );
 
-        if ( main.parent().find( "#istalking" ).first().hasClass( "no-display") ) {
+        if ( main.parent().find( "#iswriting" ).first().hasClass( "no-display") ) {
           
-          main.parent().find( "#istalking" ).first().removeClass( "no-display" );
+          main.parent().find( "#iswriting" ).first().removeClass( "no-display" );
 
           setTimeout(function () {
-            main.parent().find( "#istalking" ).first().addClass( "no-display" );
+            main.parent().find( "#iswriting" ).first().addClass( "no-display" );
           }, 2000);
         }
       }
@@ -1472,7 +1539,6 @@
   }).fail(function() {
     console.log('fail');
   }).always(function() {
-    //console.log('always');
     function displayChatOnload() {
       document.getElementById('main').style.display = 'block';
       document.getElementById('options-panel').style.display = 'block';
@@ -1482,14 +1548,6 @@
 
     displayChatOnload()
 
-    /* DEPRECATED: no longer necessary
-    // Check for browser support of event handling capability
-    if (window.addEventListener)
-      window.addEventListener('load', displayChatOnload, false);
-    else if (window.attachEvent)
-      window.attachEvent('onload', displayChatOnload);
-    else window.onload = displayChatOnload;
-    */
   });
 
 }( jQuery ));

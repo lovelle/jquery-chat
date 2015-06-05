@@ -4,6 +4,15 @@
     <meta http-equiv='content-type' content='text/html; charset=UTF-8' />
     <title>jQuery UI Chat</title>
 
+    <!-- Bootstrap 3.3.4 -->
+    <link href="templates/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome Icons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Ionicons -->
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link href="templates/AdminLTE/dist/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+
     <link id='theme' rel='stylesheet' />
     <link rel='stylesheet' href='css/tipsy.css' />
     <link rel='stylesheet' href='css/chat.css' />
@@ -20,6 +29,70 @@
   <body>
     <h1 align='center'>My website :-)</h1>
     <!--<iframe src='http://www.google.com' width='100%' height='97%'></iframe>-->
+
+    <div id='' title='' user='' style="width: 240px">
+      <div class='box box-info direct-chat direct-chat-info'>
+        <div class='box-header with-border'>
+          <h3 class='box-title'>" + user + "</h3>
+          <div class='box-tools pull-right'>
+            <span data-toggle='tooltip' title='3 New Messages' class='badge bg-blue'>3</span>
+            <button class='btn btn-box-tool' data-toggle='tooltip' title='Contacts' data-widget='chat-pane-toggle'><i class='fa fa-comments'></i></button>
+          </div>
+        </div>
+        <div id='warning' class='highlight-padding ui-state-highlight ui-corner-all o-display'>
+          <span class='window ui-icon ui-icon-info'></span>
+          <strong id='warning-alert'></strong><span id='warning-text'>Esta usuario esta desconectado</span>
+        </div>
+        <!--<div class="callout callout-warning no-display">
+          <i class='fa fa-info'> </i>
+          <span id='warning-text'> Esta usuario esta desconectado</span>
+        </div>-->
+        <div class='box-body'>
+          <div class='direct-chat-messages'>
+            <div class='direct-chat-msg'>
+              <div class='direct-chat-info clearfix'>
+                <span class='direct-chat-name pull-left'>Alexander Pierce</span>
+                <span class='direct-chat-timestamp pull-right'>23 Jan 2:00 pm</span>
+              </div>
+              <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar04.png' alt='message user image' />
+              <div class='direct-chat-text'>
+              Is this template really for free? That's unbelievable!
+              </div>
+            </div>
+            <div class='direct-chat-msg right'>
+              <div class='direct-chat-info clearfix'>
+                <span class='direct-chat-name pull-right'>Sarah Bullock</span>
+                <span class='direct-chat-timestamp pull-left'>23 Jan 2:05 pm</span>
+              </div>
+              <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar5.png' alt='message user image' />
+              <div class='direct-chat-text'>
+                You better believe it!
+              </div>
+            </div>
+          </div>
+          <div class='direct-chat-contacts'>
+            <ul class='contacts-list'>
+              <li>
+                <a href='#'>
+                  <img class='contacts-list-img' src='templates/AdminLTE/dist/img/avatar04.png' alt='Contact Avatar'/>
+                  <div class='contacts-list-info'>
+                    <span class='contacts-list-name'>
+                      Count Dracula
+                      <small class='contacts-list-date pull-right'>2/28/2015</small>
+                    </span>
+                    <span class='contacts-list-msg'>How have you been? I was...</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id='iswriting'><i class='fa fa-pencil'></i><small id='iswriting-text'>Bla is writing...</small></div>
+        <div class='box-footer'>
+          <textarea id='textarea_msg' class='form-control' name='message' placeholder='Type Message ...'></textarea>
+        </div>
+      </div>
+    </div>
 
   </body>
 </html>
