@@ -567,7 +567,7 @@
         resizable: false,
         modal: false,
         minHeight: 200,
-        maxHeight: 300,
+        maxHeight: 800,
         height: "auto",
         width: 280,
 
@@ -641,7 +641,7 @@
                 var msg = clean_msg ( $( this ).val() );
                 $( this ).val( "" );
                 main.parent().find( "#progressbar-char" ).progressbar( "option", "value", 0 );
-                append_msg_me ( msg, main );
+                append_msg_me ( msg, main, user );
                 socket.emit('message', { 'user': user, 'msg': msg });//'user' variable is the destination user
               }
               return false;
@@ -652,7 +652,8 @@
 
           }
           //Go to bottom
-          $( this ).parent().find( "#box" )[0].scrollTop = $( this ).parent().find( "#box" )[0].scrollHeight;
+          // TODO
+          //$( this ).parent().find( "#box" )[0].scrollTop = $( this ).parent().find( "#box" )[0].scrollHeight;
         },
       
         show: {
@@ -684,33 +685,57 @@
       return msg_done;
     }
 
-    function minhour() {
-      minhours = new Date();
-      var hour = minhours.getHours();
-      var min  = minhours.getMinutes();
-      var ampm = " PM";
+    function minhour(d) {
+      var hour = d.getHours();
+      var mins = d.getMinutes();
+      var ampm = " pm";
 
       if( hour < 10 ) { hour = "0" + hour; }
-      if( hour < 12 ) { ampm = " AM"; }
-      if( min < 10 ) { min = "0" + min; }
+      if( hour < 12 ) { ampm = " am"; }
+      if( mins < 10 ) { mins = "0" + mins; }
 
-      var text = hour + ":" + min + ampm;
+      var text = hour + ":" + mins + ampm;
       return text;
     }
 
-    // Wich msg will be append
-    function append_msg_me ( msg, main ) {
+    function get_date() {
+      var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+      var d = new Date();
+      var day = d.getDay();
+      var month = d.getMonth();
+      var txt = day + " " + monthNames[month] + " " + minhour(d);
+      return txt
+    }
 
+    // Wich msg will be append
+    function append_msg_me ( msg, main, user ) {
+
+      var me = main.parent().find( ".direct-chat-messages" ).last();
+
+      me.append("\
+        <div class='direct-chat-msg'>\
+          <div class='direct-chat-info clearfix'>\
+            <span class='direct-chat-name pull-left'>" + user + "</span>\
+            <span class='direct-chat-timestamp pull-right'>" + get_date() + "</span>\
+          </div>\
+          <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar04.png' alt='message user image' />\
+          <div class='direct-chat-text'>" + msg + "</div>\
+        </div>");
+      //<span class='msg-text'>" + msg + "</span>
+      /*
       if ( main.parent().find("#chatbox").children().last().attr('id') == 'me' )
         main.parent().find( "#chatbox" ).children().last().append( "<span class='msg-text'>" + msg + "</span>" );
       else
         main.parent().find( "#chatbox" ).append( "<div id='me'><span class='msg-time'>" + minhour() + "</span><span class='msg'><b>" + i18n.me + ": </b><span class='msg-toptext'>" + msg + "</span></span></div>" );
+      */
       // Go to bottom
-      main.parent().find( "#box" )[0].scrollTop = main.parent().find( "#box" )[0].scrollHeight;
+      main.parent().find( ".box-body" )[0].scrollTop = main.parent().find( ".box-body" )[0].scrollHeight;
     }
 
     function append_msg_he ( msg, main, name ) {
 
+      /*
       var fname = name.split(' '),
       firstname = fname[0],
       lastname  = fname[fname.length - 1];
@@ -719,8 +744,9 @@
         main.parent().find( "#chatbox" ).children().last().append( "<span class='msg-text'>" + msg + "</span>" );
       else
         main.parent().find( "#chatbox" ).append( "<div id='he'><span class='msg-time'>" + minhour() + "</span><span class='msg'><b>" + firstname + ": </b><span class='msg-toptext'>" + msg + "</span></span></div>" );
+      */
       // Go to bottom
-      main.parent().find( "#box" )[0].scrollTop = main.parent().find( "#box" )[0].scrollHeight;
+      main.parent().find( ".box-body" )[0].scrollTop = main.parent().find( ".box-body" )[0].scrollHeight;
     }
 
     //Function for Open chat box
@@ -944,7 +970,7 @@
           </div>");
           */
 
-        $( "body" ).append( "\
+          /*
           <div id='Dialog" + id + "' title='' user='" + user + "'>\
             <div class='box box-info direct-chat direct-chat-info'>\
               <div class='box-header with-border'>\
@@ -1000,6 +1026,32 @@
                       </a>\
                     </li>\
                   </ul>\
+                </div>\
+              </div>\
+              <div id='iswriting'><i class='fa fa-pencil'></i><small id='iswriting-text'></small></div>\
+              <div class='box-footer'>\
+                <textarea id='textarea_msg' class='form-control' name='message' placeholder='Type Message ...'></textarea>\
+              </div>\
+            </div>\
+          </div>");
+          */
+
+        $( "body" ).append( "\
+          <div id='Dialog" + id + "' title='' user='" + user + "'>\
+            <div class='box box-info direct-chat direct-chat-info'>\
+              <div class='box-header with-border'>\
+                <h4 class='box-title'><small>" + user + "</small></h4>\
+                <div class='box-tools pull-right'>\
+                  <span data-toggle='tooltip' title='0 New Messages' class='badge bg-blue'>0</span>\
+                  <button class='btn btn-box-tool' data-toggle='tooltip' title='Contacts' data-widget='chat-pane-toggle'><i class='fa fa-comments'></i></button>\
+                </div>\
+              </div>\
+              <div id='warning' class='highlight-padding ui-state-highlight ui-corner-all no-display'>\
+                <span class='window ui-icon ui-icon-info'></span>\
+                <strong id='warning-alert'></strong><span id='warning-text'></span>\
+              </div>\
+              <div class='box-body'>\
+                <div class='direct-chat-messages'>\
                 </div>\
               </div>\
               <div id='iswriting'><i class='fa fa-pencil'></i><small id='iswriting-text'></small></div>\

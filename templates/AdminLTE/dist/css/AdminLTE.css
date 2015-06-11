@@ -2605,7 +2605,9 @@ table.text-center th {
   -o-transform: translate(0, 0);
   transform: translate(0, 0);
   padding: 10px;
-  height: 250px;
+  /*height: 250px;*/
+  /* lovelle */
+  min-height: 160px;
   overflow: auto;
 }
 .direct-chat-msg,
@@ -2704,7 +2706,8 @@ table.text-center th {
   position: absolute;
   top: 0;
   bottom: 0;
-  height: 250px;
+  /* lovelle */
+  /* height: 250px; */
   width: 100%;
   background: #222d32;
   color: #fff;
