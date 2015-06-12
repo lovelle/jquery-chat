@@ -47,5 +47,6 @@ var i18n =
   must_be_between:'doit être entre',
   failed:'Échec de la connexion, vérifiez votre connexion.',
   all_fields_required:'Tous les champs sont requis',
-  validate_username:'Les caractères autorisés sont les suivants: a-z, 0-9, underscores, et il doit impérativement commencer par une lettre.'
+  validate_username:'Les caractères autorisés sont les suivants: a-z, 0-9, underscores, et il doit impérativement commencer par une lettre.',
+  new_messages: 'Nouveaux messages'
 };

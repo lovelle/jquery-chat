@@ -47,5 +47,6 @@ var i18n =
 	must_be_between:'debe ser entre',
 	failed:'No se puede conectar. Comprueba tu conexión.',
 	all_fields_required:'Todos los campos son obligatorios',
-	validate_username:'Usuario solo puede contener: a-z, 0-9, subrayado y debe comenzar con una letra.'
+	validate_username:'Usuario solo puede contener: a-z, 0-9, subrayado y debe comenzar con una letra.',
+	new_messages: 'Nuevos mensajes'
 };

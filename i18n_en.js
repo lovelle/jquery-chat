@@ -47,5 +47,6 @@ var i18n =
 	must_be_between:'must be between',
 	failed:'Can not connect. Check your connection.',
 	all_fields_required:'All form fields are required',
-	validate_username:'Username may consist of a-z, 0-9, underscores, begin with a letter.'
+	validate_username:'Username may consist of a-z, 0-9, underscores, begin with a letter.',
+	new_messages: 'New messages'
 };

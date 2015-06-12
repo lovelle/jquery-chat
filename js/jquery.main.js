@@ -581,6 +581,7 @@
 
             //Save the top of dialog
             var main = $( this );
+            var name = $( this ).data( "name" );
 
             //Change text for the default lang
             main_chat_set_dialog_lang( $( this ) );
@@ -590,7 +591,7 @@
             //Boton "minimizar"
             $( this ).parent().find( ".ui-dialog-titlebar" ).append( "<button class='ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only minimize-window' role='button' aria-disabled='false' title='" + i18n.minimize + "'><span class='ui-icon ui-icon-minus'></span></button>" );
             //Boton online
-            $( this ).parent().find( ".ui-dialog-title" ).append( "<li id='dialog-status' class='" + $( this ).data( "status" ) + "'>" + $( this ).data( "name" ) + "</li>" );
+            $( this ).parent().find( ".ui-dialog-title" ).append( "<li id='dialog-status' class='" + $( this ).data( "status" ) + "'>" + name + "</li>" );
 
             //Set hide 'is writing...'
             $( this ).parent().find( "#iswriting" ).first().addClass( "no-display" );
@@ -636,12 +637,12 @@
                 $( this ).val( remove_excess );
               }
               
-              //'Enter' event
+              //Intro event
               if ( (e.which == 13) && !event.shiftKey ) {
                 var msg = clean_msg ( $( this ).val() );
                 $( this ).val( "" );
                 main.parent().find( "#progressbar-char" ).progressbar( "option", "value", 0 );
-                append_msg_me ( msg, main, user );
+                append_msg_me( msg, main );
                 socket.emit('message', { 'user': user, 'msg': msg });//'user' variable is the destination user
               }
               return false;
@@ -652,7 +653,7 @@
           }
 
           //Go to bottom
-          var i = main.parent().find(".box-body").children().last();
+          var i = $( this ).parent().find(".box-body").children().last();
           i[0].scrollTop = i[0].scrollHeight;
         },
       
@@ -709,7 +710,7 @@
     }
 
     // Append my messages
-    function append_msg_me ( msg, main, user ) {
+    function append_msg_me ( msg, main ) {
       var box = main.parent().find(".box-body");
       var me = box.children().last();
 
@@ -1055,7 +1056,7 @@
               <div class='box-header with-border'>\
                 <h4 class='box-title'><small>" + user + "</small></h4>\
                 <div class='box-tools pull-right'>\
-                  <span data-toggle='tooltip' title='0 New Messages' class='badge bg-blue'>0</span>\
+                  <span data-toggle='tooltip' title='0 New Messages' class='badge bg-blue new-messages'>0</span>\
                   <button class='btn btn-box-tool' data-toggle='tooltip' title='Contacts' data-widget='chat-pane-toggle'><i class='fa fa-comments'></i></button>\
                 </div>\
               </div>\
@@ -1068,6 +1069,7 @@
                 </div>\
               </div>\
               <div id='iswriting'><i class='fa fa-pencil'></i><small id='iswriting-text'></small></div>\
+              <div id='progressbar-char'></div>\
               <div class='box-footer'>\
                 <textarea id='textarea_msg' class='form-control' name='message' placeholder='Type Message ...'></textarea>\
               </div>\
@@ -1100,7 +1102,7 @@
         'cancel', 'info', 'choose_stat', 'close_session', 'open_session', 'char_max', 'is_writing', 'alert', 'user_is', 'theme', 'lang',
         'search', 'rm_search', 'main', 'sounds', 'enabled', 'disabled', 'please_wait', 'no_users', 'user_not_found',
         'seconds', 'reconnection', 'try_it', 'length_of', 'must_be_between', 'failed', 'all_fields_required',
-        'validate_username' ];
+        'validate_username', 'new_messages' ];
 
         for (var i = 0; i < i18n_elem.length; i++) {
           if (i18n[i18n_elem[i]] === undefined || i18n[i18n_elem[i]] === null) {
@@ -1311,20 +1313,44 @@
       //TODO: change position of all chat dialog opened
     }
 
+    function main_chat_new_messages (action, main) {
+      // action: 0 set to 0 count of messsages no reed
+      // action: 1 increment count of messsages no reed
+      if (action == 0) {
+        var nmsgs = 0;
+      } else {
+        var msgs = parseInt(main.find( ".new-messages" ).text());
+        var nmsgs = msgs + 1;
+      }
+
+      var txt = nmsgs + " " + i18n.new_messages;
+      main.find( ".new-messages" ).text( nmsgs );
+      main.find( ".new-messages" ).prop("title", txt);
+    }
+
     function main_chat_user_alert ( id, action ) {
       //action = 0, add notification if not already have one
       //action = 1, del notification if already have one
+      var main = $( "#Dialog" + id );
 
       if (action == 0) {
-        if ( !$( "#Dialog" + id ).parent().find( ".ui-dialog-titlebar" ).hasClass( "ui-state-highlight" ) ) {
-          $( "#Dialog" + id ).parent().find( ".ui-dialog-titlebar" ).addClass( "ui-state-highlight", 500 );
+        if ( !main.parent().find( ".ui-dialog-titlebar" ).hasClass( "ui-state-highlight" ) ) {
+          main.parent().find( ".ui-dialog-titlebar" ).addClass( "ui-state-highlight", 500 );
           $( "#user-button-" + id ).addClass( "ui-state-error", 500 );  
         }
+
+        //Increment number of new messages not read // caca
+        main_chat_new_messages(1, main);
+
       } else if (action == 1) {
-        if ( $( "#Dialog" + id ).parent().find( ".ui-dialog-titlebar" ).hasClass( "ui-state-highlight" ) ) {
-          $( "#Dialog" + id ).parent().find( ".ui-dialog-titlebar" ).removeClass( "ui-state-highlight", 500 );
+        if ( main.parent().find( ".ui-dialog-titlebar" ).hasClass( "ui-state-highlight" ) ) {
+          main.parent().find( ".ui-dialog-titlebar" ).removeClass( "ui-state-highlight", 500 );
           $( "#user-button-" + id ).removeClass( "ui-state-error", 500 );  
         }
+
+        //Set to 0 number of new messages not read
+        main_chat_new_messages(0, main);
+
       } else
         alert( "main_chat_user_alert() unexpected action '" + action + "', please report this" );
     }
@@ -1340,7 +1366,6 @@
       $( ".ui-dialog-content" ).dialog( "close" );
       $( "#main-users-resizer" ).hide();
     }*/
-
 
     //Disconnect
     function main_chat_disconnect() {
@@ -1459,7 +1484,7 @@
         //Check focus state and focus document to do sound and alert
         if( !$(document).is(document.activeElement) || !main.find( "#textarea_msg" ).is(document.activeElement) ) {
           //Do sound effect
-          //TODO: if sounds has been disabled, dont do it
+          //if sounds has been disabled, dont do it
           if ( conf_sound_active == true )
             $( "#audio-popup" ).trigger( "play" );
 

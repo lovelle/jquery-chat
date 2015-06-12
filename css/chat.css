@@ -179,8 +179,8 @@ body {
 }
 
 #main-users-resizer {
-	width: 200px;
-	min-height: 200px;
+	width: 202px;
+	min-height: 202px;
 	display: inline-block;
 	position: fixed;
 	z-index: 50000;
