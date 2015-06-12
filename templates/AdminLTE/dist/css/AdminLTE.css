@@ -2607,6 +2607,7 @@ table.text-center th {
   padding: 10px;
   /*height: 250px;*/
   /* lovelle */
+  max-height: 210px;
   min-height: 160px;
   overflow: auto;
 }

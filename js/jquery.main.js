@@ -242,7 +242,7 @@
               bValid = bValid && checkLength( name, "username", 3, 16 );
               bValid = bValid && checkLength( email, "email", 6, 80 );
      
-              bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_])+$/i, i18n.validate_username );
+              bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_\ ])+$/i, i18n.validate_username );
               // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
               bValid = bValid && checkRegexp( email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. user@example.com" );
      
@@ -567,7 +567,7 @@
         resizable: false,
         modal: false,
         minHeight: 200,
-        maxHeight: 800,
+        maxHeight: 400,
         height: "auto",
         width: 280,
 
@@ -627,7 +627,7 @@
             $( this ).find( "textarea" ).first().keyup(function( e ) {
 
               if (typingTimeout != undefined) clearTimeout(typingTimeout);
-              typingTimeout = setTimeout(function() { callUserTyping(user) }, 400);
+              typingTimeout = setTimeout(function() { call_user_is_writing(user) }, 400);
 
               //Progressbar of char in textarea
               main.parent().find( "#progressbar-char" ).progressbar( "option", "value", $( this ).val().length );
@@ -649,11 +649,11 @@
 
             //Init char progress bar
             $( this ).find( "#progressbar-char" ).first().progressbar({ value: 0 });
-
           }
+
           //Go to bottom
-          // TODO
-          //$( this ).parent().find( "#box" )[0].scrollTop = $( this ).parent().find( "#box" )[0].scrollHeight;
+          var i = main.parent().find(".box-body").children().last();
+          i[0].scrollTop = i[0].scrollHeight;
         },
       
         show: {
@@ -665,7 +665,7 @@
       });
     }
 
-    function callUserTyping(user) {
+    function call_user_is_writing(user) {
       socket.emit('user_typing', { 'user': user });
     }
 
@@ -694,8 +694,8 @@
       if( hour < 12 ) { ampm = " am"; }
       if( mins < 10 ) { mins = "0" + mins; }
 
-      var text = hour + ":" + mins + ampm;
-      return text;
+      var r = hour + ":" + mins + ampm;
+      return r;
     }
 
     function get_date() {
@@ -704,49 +704,62 @@
       var d = new Date();
       var day = d.getDay();
       var month = d.getMonth();
-      var txt = day + " " + monthNames[month] + " " + minhour(d);
-      return txt
+      var r = day + " " + monthNames[month] + " " + minhour(d);
+      return r
     }
 
-    // Wich msg will be append
+    // Append my messages
     function append_msg_me ( msg, main, user ) {
+      var box = main.parent().find(".box-body");
+      var me = box.children().last();
 
-      var me = main.parent().find( ".direct-chat-messages" ).last();
+      if (me.children().last().attr('id') == 'me') {
+        me.children().find('.direct-chat-text').last().append("<div>" + msg + "</div>")
+      } else {
+        me.append("\
+          <div class='direct-chat-msg right' id='me'>\
+            <div class='direct-chat-info clearfix'>\
+              <span class='direct-chat-name pull-right'>Me</span>\
+              <span class='direct-chat-timestamp pull-left'>" + get_date() + "</span>\
+            </div>\
+            <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar5.png' alt='message user image' />\
+            <div class='direct-chat-text'>\
+              <div>" + msg + "</div>\
+            </div>\
+          </div>");
+      };
 
-      me.append("\
-        <div class='direct-chat-msg'>\
-          <div class='direct-chat-info clearfix'>\
-            <span class='direct-chat-name pull-left'>" + user + "</span>\
-            <span class='direct-chat-timestamp pull-right'>" + get_date() + "</span>\
-          </div>\
-          <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar04.png' alt='message user image' />\
-          <div class='direct-chat-text'>" + msg + "</div>\
-        </div>");
-      //<span class='msg-text'>" + msg + "</span>
-      /*
-      if ( main.parent().find("#chatbox").children().last().attr('id') == 'me' )
-        main.parent().find( "#chatbox" ).children().last().append( "<span class='msg-text'>" + msg + "</span>" );
-      else
-        main.parent().find( "#chatbox" ).append( "<div id='me'><span class='msg-time'>" + minhour() + "</span><span class='msg'><b>" + i18n.me + ": </b><span class='msg-toptext'>" + msg + "</span></span></div>" );
-      */
       // Go to bottom
-      main.parent().find( ".box-body" )[0].scrollTop = main.parent().find( ".box-body" )[0].scrollHeight;
+      me[0].scrollTop = me[0].scrollHeight;
     }
 
     function append_msg_he ( msg, main, name ) {
+      var fullname = '';
+      var fname = name.split(' ');
+      var box = main.parent().find(".box-body");
+      var he = box.children().last();
 
-      /*
-      var fname = name.split(' '),
-      firstname = fname[0],
-      lastname  = fname[fname.length - 1];
+      if (fname.length == 2) fullname = fname[0] + " " + fname[1];
+      else fullname = fname[0];
 
-      if ( main.parent().find("#chatbox").children().last().attr('id') == 'he' )
-        main.parent().find( "#chatbox" ).children().last().append( "<span class='msg-text'>" + msg + "</span>" );
-      else
-        main.parent().find( "#chatbox" ).append( "<div id='he'><span class='msg-time'>" + minhour() + "</span><span class='msg'><b>" + firstname + ": </b><span class='msg-toptext'>" + msg + "</span></span></div>" );
-      */
+      if (he.children().last().attr('id') == 'he') {
+        he.children().find('.direct-chat-text').last().append("<div>" + msg + "</div>")
+      } else {
+        he.append("\
+          <div class='direct-chat-msg' id='he'>\
+            <div class='direct-chat-info clearfix'>\
+              <span class='direct-chat-name pull-left'>" + fullname + "</span>\
+              <span class='direct-chat-timestamp pull-right'>" + get_date() + "</span>\
+            </div>\
+            <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar04.png' alt='message user image' />\
+            <div class='direct-chat-text'>\
+              <div>" + msg + "</div>\
+            </div>\
+          </div>");
+      };
+
       // Go to bottom
-      main.parent().find( ".box-body" )[0].scrollTop = main.parent().find( ".box-body" )[0].scrollHeight;
+      he[0].scrollTop = he[0].scrollHeight;
     }
 
     //Function for Open chat box
