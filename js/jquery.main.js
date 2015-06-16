@@ -959,97 +959,6 @@
 
     function main_append_dialog ( id, user ) {
       if ( $( "#Dialog" + id ).length == 0 ) {
-        /*var xhr_dialog_box = $.get( "views/new-dialog.html", function( dialog_box ) {
-          $( "body" ).append( dialog_box );
-        });*/
-
-        /*
-        $( "body" ).append( "\
-          <div id='Dialog" + id + "' title='' user='" + user + "'>\
-            <div id='warning' class='highlight-padding ui-state-highlight ui-corner-all no-display'>\
-              <span class='window ui-icon ui-icon-info'></span>\
-              <strong id='warning-alert'></strong><span id='warning-text'></span>\
-            </div>\
-            <div id='box' class='ui-widget-content ui-corner-all ui-chatbox-log'>\
-              <span id='chatbox'>\
-              </span>\
-            </div>\
-            <div id='apps' class='ui-chatbox-input'>\
-              <span class='floater'>\
-                <div id='progressbar-char'></div>\
-                <div id='istalking'><li><span class='ui-icon ui-icon-comment window'></span><span id='istalking-text'></span></li></div>\
-                <textarea id='textarea_msg' class='textarea-msg ui-chatbox-input-box ui-corner-all ui-chatbox-input-focus'></textarea>\
-              </span>\
-            </div>\
-          </div>");
-          */
-
-          /*
-          <div id='Dialog" + id + "' title='' user='" + user + "'>\
-            <div class='box box-info direct-chat direct-chat-info'>\
-              <div class='box-header with-border'>\
-                <h3 class='box-title'>" + user + "</h3>\
-                <div class='box-tools pull-right'>\
-                  <span data-toggle='tooltip' title='3 New Messages' class='badge bg-blue'>3</span>\
-                  <button class='btn btn-box-tool' data-toggle='tooltip' title='Contacts' data-widget='chat-pane-toggle'><i class='fa fa-comments'></i></button>\
-                </div>\
-              </div>\
-              <div id='warning' class='highlight-padding ui-state-highlight ui-corner-all no-display'>\
-                <span class='window ui-icon ui-icon-info'></span>\
-                <strong id='warning-alert'></strong><span id='warning-text'></span>\
-              </div>\
-              <!--<div class='callout callout-warning no-display'>\
-                <i class='fa fa-info'> </i>\
-                <span id='warning-text'> Esta usuario esta desconectado</span>\
-              </div>-->\
-              <div class='box-body'>\
-                <div class='direct-chat-messages'>\
-                  <div class='direct-chat-msg'>\
-                    <div class='direct-chat-info clearfix'>\
-                      <span class='direct-chat-name pull-left'>Alexander Pierce</span>\
-                      <span class='direct-chat-timestamp pull-right'>23 Jan 2:00 pm</span>\
-                    </div>\
-                    <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar04.png' alt='message user image' />\
-                    <div class='direct-chat-text'>\
-                    Is this template really for free? That's unbelievable!\
-                    </div>\
-                  </div>\
-                  <div class='direct-chat-msg right'>\
-                    <div class='direct-chat-info clearfix'>\
-                      <span class='direct-chat-name pull-right'>Sarah Bullock</span>\
-                      <span class='direct-chat-timestamp pull-left'>23 Jan 2:05 pm</span>\
-                    </div>\
-                    <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar5.png' alt='message user image' />\
-                    <div class='direct-chat-text'>\
-                      You better believe it!\
-                    </div>\
-                  </div>\
-                </div>\
-                <div class='direct-chat-contacts'>\
-                  <ul class='contacts-list'>\
-                    <li>\
-                      <a href='#'>\
-                        <img class='contacts-list-img' src='templates/AdminLTE/dist/img/avatar04.png' alt='Contact Avatar'/>\
-                        <div class='contacts-list-info'>\
-                          <span class='contacts-list-name'>\
-                            Count Dracula\
-                            <small class='contacts-list-date pull-right'>2/28/2015</small>\
-                          </span>\
-                          <span class='contacts-list-msg'>How have you been? I was...</span>\
-                        </div>\
-                      </a>\
-                    </li>\
-                  </ul>\
-                </div>\
-              </div>\
-              <div id='iswriting'><i class='fa fa-pencil'></i><small id='iswriting-text'></small></div>\
-              <div class='box-footer'>\
-                <textarea id='textarea_msg' class='form-control' name='message' placeholder='Type Message ...'></textarea>\
-              </div>\
-            </div>\
-          </div>");
-          */
-
         $( "body" ).append( "\
           <div id='Dialog" + id + "' title='' user='" + user + "'>\
             <div class='box box-info direct-chat direct-chat-info'>\
@@ -1355,18 +1264,6 @@
         alert( "main_chat_user_alert() unexpected action '" + action + "', please report this" );
     }
 
-    //Close session
-    /*function main_chat_close() {
-      $( "#chat-main-title-id" ).remove();
-      chat_num_users = 1;
-      main_chat_users_num( 2, 0 );//0 chat users at begining
-      main_chat_status( i18n.disconnected, "offline" );//Main chat title bar
-      main_chat_title( 2 );
-      //Close all
-      $( ".ui-dialog-content" ).dialog( "close" );
-      $( "#main-users-resizer" ).hide();
-    }*/
-
     //Disconnect
     function main_chat_disconnect() {
       chat_num_users = 0;
@@ -1385,14 +1282,12 @@
         socket_disconnect();
     }
 
-
     function socket_connect() {
       socket = io.connect( 'http://'+ conf_server , {
         port: conf_port,
         'connect timeout': 5000
       });
     }
-
 
     function socket_handle() {
 
@@ -1447,12 +1342,10 @@
       socket.emit('join', { 'user': login_email, 'name': login_name });
     }
 
-
     function socket_disconnect () {
       socket.disconnect();
       chat_reconnect = 1;
     }
-
 
     function socket_reconnect() {
       socket.socket.reconnect();
@@ -1556,12 +1449,10 @@
       }
     }
 
-
     //Change theme
     $( "#theme-custom" ).change(function() {
       main_set_theme( $( this ).val() );
     });
-
 
     //Change sound
     $( "#radioenabled, #radiodisabled" ).change(function() {
@@ -1572,7 +1463,6 @@
       else if (id == 'radiodisabled')
         conf_sound_active = false;
     });
-
 
     //Change language
     $( "#i18n" ).change(function() {
@@ -1586,7 +1476,6 @@
         chat_changed_lang = true;//Change flag for dialog lang
       });
     });
-
 
     $( "#slider" ).hide();
     var scrollPane = $(".slider_container");
@@ -1625,7 +1514,6 @@
       }
     });
 
-
   }).fail(function() {
     console.log('fail');
   }).always(function() {
@@ -1637,7 +1525,6 @@
     }
 
     displayChatOnload()
-
   });
 
 }( jQuery ));
