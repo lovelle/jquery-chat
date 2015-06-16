@@ -723,7 +723,7 @@
               <span class='direct-chat-name pull-right'>Me</span>\
               <span class='direct-chat-timestamp pull-left'>" + get_date() + "</span>\
             </div>\
-            <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar5.png' alt='message user image' />\
+            <img class='direct-chat-img' src='templates/AdminLTE/dist/img/icon-user-default.png' alt='message user image' />\
             <div class='direct-chat-text'>\
               <div>" + msg + "</div>\
             </div>\
