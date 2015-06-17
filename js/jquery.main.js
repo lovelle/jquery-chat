@@ -699,10 +699,10 @@
       return r;
     }
 
-    function get_date() {
+    function get_format_date(date) {
       var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-      var d = new Date();
+      var d = new Date(date);
       var day = d.getDay();
       var month = d.getMonth();
       var r = day + " " + monthNames[month] + " " + minhour(d);
@@ -711,6 +711,7 @@
 
     // Append my messages
     function append_msg_me ( msg, main ) {
+      var date = '2015-06-17T00:24:38.365Z';
       var box = main.parent().find(".box-body");
       var me = box.children().last();
 
@@ -720,8 +721,8 @@
         me.append("\
           <div class='direct-chat-msg right' id='me'>\
             <div class='direct-chat-info clearfix'>\
-              <span class='direct-chat-name pull-right'>Me</span>\
-              <span class='direct-chat-timestamp pull-left'>" + get_date() + "</span>\
+              <span class='direct-chat-name pull-right'>" + login_name + "</span>\
+              <span class='direct-chat-timestamp pull-left'>" + get_format_date(date) + "</span>\
             </div>\
             <img class='direct-chat-img' src='templates/AdminLTE/dist/img/icon-user-default.png' alt='message user image' />\
             <div class='direct-chat-text'>\
@@ -734,7 +735,7 @@
       me[0].scrollTop = me[0].scrollHeight;
     }
 
-    function append_msg_he ( msg, main, name ) {
+    function append_msg_he ( msg, main, name, date ) {
       var fullname = '';
       var fname = name.split(' ');
       var box = main.parent().find(".box-body");
@@ -750,7 +751,7 @@
           <div class='direct-chat-msg' id='he'>\
             <div class='direct-chat-info clearfix'>\
               <span class='direct-chat-name pull-left'>" + fullname + "</span>\
-              <span class='direct-chat-timestamp pull-right'>" + get_date() + "</span>\
+              <span class='direct-chat-timestamp pull-right'>" + get_format_date(date) + "</span>\
             </div>\
             <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar04.png' alt='message user image' />\
             <div class='direct-chat-text'>\
@@ -1358,6 +1359,7 @@
       var action  = recv.action;
 
       if (action == 'message') {
+        var date   = recv.date;
         var iduser = recv.data.user.uid;
         var name   = recv.data.user.name;
         var status = recv.data.user.status;
@@ -1385,7 +1387,7 @@
           main_chat_user_alert( iduser, 0 );
         }
 
-        append_msg_he ( msg, main, name );
+        append_msg_he( msg, main, name, date );
       }
 
       else if ( action == 'newuser' ) {

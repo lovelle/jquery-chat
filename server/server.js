@@ -49,15 +49,16 @@ io.sockets.on('connection', function (socket) {
 
 	// Event received when user is typing
 	socket.on('user_typing', function (recv) {
-		var id  = socks[recv.user].socket.id;
+		var id = socks[recv.user].socket.id;
 		io.sockets.socket(id).emit('chat', JSON.stringify( {'action': 'user_typing', 'data': users[socket.user]} ));
 	});
 
 	// Event received when user send message to another
 	socket.on('message', function (recv) {
-		var id  = socks[recv.user].socket.id;
+		var d = new Date();
+		var id = socks[recv.user].socket.id;
 		var msg = {'msg': recv.msg, 'user': users[socket.user]};
-		io.sockets.socket(id).emit('chat', JSON.stringify( {'action': 'message', 'data': msg} ));
+		io.sockets.socket(id).emit('chat', JSON.stringify( {'action': 'message', 'data': msg, 'date': d} ));
 	});
 
 	// Event received when user has disconnected
