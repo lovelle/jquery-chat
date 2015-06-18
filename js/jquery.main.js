@@ -962,7 +962,8 @@
       if ( $( "#Dialog" + id ).length == 0 ) {
         $( "body" ).append( "\
           <div id='Dialog" + id + "' title='' user='" + user + "'>\
-            <div class='box box-info direct-chat direct-chat-info'>\
+                                                                              <!-- MUST CHANGE -->\
+            <div class='box box-info direct-chat direct-chat-info ui-widget-content no-content-border'>\
               <div class='box-header with-border'>\
                 <h4 class='box-title'><small>" + user + "</small></h4>\
                 <div class='box-tools pull-right'>\
@@ -978,9 +979,12 @@
                 <div class='direct-chat-messages'>\
                 </div>\
               </div>\
-              <div id='iswriting'><i class='fa fa-pencil'></i><small id='iswriting-text'></small></div>\
-              <div id='progressbar-char'></div>\
-              <div class='box-footer'>\
+              <div id='iswriting' class='pull-right'>\
+                <i class='fa fa-pencil'></i>\
+                <small id='iswriting-text'></small>\
+              </div>\
+              <div id='progressbar-char' class='pull-left'></div>\
+              <div class='small-box-footer'>\
                 <textarea id='textarea_msg' class='form-control' name='message' placeholder='Type Message ...'></textarea>\
               </div>\
             </div>\

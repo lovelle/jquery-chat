@@ -31,7 +31,7 @@
     <!--<iframe src='http://www.google.com' width='100%' height='97%'></iframe>-->
 
     <div id='' title='' user='' style="width: 240px" class="no-display">
-      <div class='box box-info direct-chat direct-chat-info'>
+      <div class='box box-info direct-chat direct-chat-info ui-widget-content'>
       <!-- box box-primary direct-chat direct-chat-info direct-chat-primary -->
         <div class='box-header with-border'>
           <h3 class='box-title'>" + user + "</h3>
@@ -88,9 +88,12 @@
             </ul>
           </div>
         </div>
-        <div id='iswriting'><i class='fa fa-pencil'></i><small id='iswriting-text'>Bla is writing...</small></div>
-        <div id='progressbar-char'></div>
-        <div class='box-footer'>
+        <div id='iswriting' class='pull-right'>
+          <i class='fa fa-pencil'></i>
+          <small id='iswriting-text'>Bla is writing...</small>
+        </div>
+        <div id='progressbar-char' class='pull-left'></div>
+        <div class='small-box-footer'>
           <textarea id='textarea_msg' class='form-control' name='message' placeholder='Type Message ...'></textarea>
         </div>
       </div>

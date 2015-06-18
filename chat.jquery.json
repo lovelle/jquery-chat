@@ -3,14 +3,14 @@
     "title": "jQuery Chat",
     "description": "100% pure javascript realtime chat (client and server) facebook/gmail style web chat.",
     "keywords": [
-    "javascript",
-    "chat",
-    "html5",
-    "websocket",
-    "jquery",
-    "realtime"
+        "javascript",
+        "chat",
+        "html5",
+        "websocket",
+        "jquery",
+        "realtime"
     ],
-    "version": "1.2.1",
+    "version": "1.0.1",
     "author": {
         "name": "Ezequiel Lovelle",
         "email": "ezequiellovelle@gmail.com",

@@ -234,12 +234,20 @@ body {
 	display: none;
 }
 
+#iswriting {
+	margin-right: 4px;
+	margin-bottom: 4px;
+}
+
+.no-content-border {
+	border: 0px;
+}
+
 #progressbar-char {
-	width: 55px;
-	float: left;
-    margin-top: 1.2em;
-    margin-bottom: 0.4em;
-    height: 6px;
+	width: 30%;
+	margin-left: 4px;
+	margin-bottom: 4px;
+	height: 6px;
 }
 
 #istalking {

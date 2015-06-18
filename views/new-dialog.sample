@@ -1,5 +1,5 @@
 <div id='' title='' user=''>\
-  <div class='box box-info direct-chat direct-chat-info'>\
+  <div class='box box-info direct-chat direct-chat-info ui-widget-content'>\
     <div class='box-header with-border'>\
       <h3 class='box-title'>" + user + "</h3>\
       <div class='box-tools pull-right'>\
@@ -47,8 +47,12 @@
         </ul>\
       </div>\
     </div>\
-    <div class='box-footer'>\
-      <div id='iswriting'><i class='fa fa-pencil'></i><small id='iswriting-text'></small></div>\
+    <div class='small-box-footer'>\
+      <div id='iswriting' class='pull-right'>\
+        <i class='fa fa-pencil'></i>\
+        <small id='iswriting-text'>Bla is writing...</small>\
+      </div>\
+      <div id='progressbar-char' class='pull-left'></div>\
       <textarea id='textarea_msg' class='form-control' name='message' placeholder='Type Message ...'></textarea>\
     </div>\
   </div>\
