@@ -9,8 +9,9 @@
   chat_num_users = 0,
   chat_title_status = 2,
   chat_changed_lang = true,
-  login_email,
-  login_name,
+  user_email,
+  user_name,
+  user_avatar,
   socket;
 
   var conf_domain,
@@ -247,8 +248,8 @@
               bValid = bValid && checkRegexp( email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. user@example.com" );
      
               if ( bValid ) {
-                login_email = email.val();
-                login_name  = name.val();
+                user_email = email.val();
+                user_name  = name.val();
                 $( this ).dialog( "close" );
                 //Open chat
                 $( "#chat-title-button" ).trigger( "click" );
@@ -423,7 +424,7 @@
 
       if ( chat_stat == 0 ) {
         
-        if (!login_name || !login_email) {
+        if (!user_name || !user_email) {
           $( "#dialog-login" ).dialog( "open" );
           return false;
         }
@@ -721,10 +722,10 @@
         me.append("\
           <div class='direct-chat-msg right' id='me'>\
             <div class='direct-chat-info clearfix'>\
-              <span class='direct-chat-name pull-right'>" + login_name + "</span>\
+              <span class='direct-chat-name pull-right'>" + user_name + "</span>\
               <span class='direct-chat-timestamp pull-left'>" + get_format_date(date) + "</span>\
             </div>\
-            <img class='direct-chat-img' src='templates/AdminLTE/dist/img/icon-user-default.png' alt='message user image' />\
+            <img class='direct-chat-img' src='" + user_avatar + "' alt='message user image' />\
             <div class='direct-chat-text'>\
               <div>" + msg + "</div>\
             </div>\
@@ -735,7 +736,7 @@
       me[0].scrollTop = me[0].scrollHeight;
     }
 
-    function append_msg_he ( msg, main, name, date ) {
+    function append_msg_he ( msg, main, name, date, avatar ) {
       var fullname = '';
       var fname = name.split(' ');
       var box = main.parent().find(".box-body");
@@ -753,7 +754,7 @@
               <span class='direct-chat-name pull-left'>" + fullname + "</span>\
               <span class='direct-chat-timestamp pull-right'>" + get_format_date(date) + "</span>\
             </div>\
-            <img class='direct-chat-img' src='templates/AdminLTE/dist/img/avatar04.png' alt='message user image' />\
+            <img class='direct-chat-img' src='" + avatar + "' alt='message user image' />\
             <div class='direct-chat-text'>\
               <div>" + msg + "</div>\
             </div>\
@@ -985,7 +986,7 @@
               </div>\
               <div id='progressbar-char' class='pull-left'></div>\
               <div class='small-box-footer'>\
-                <textarea id='textarea_msg' class='form-control' name='message' placeholder='Type Message ...'></textarea>\
+                <textarea id='textarea_msg' class='form-control' name='message' placeholder='"+ i18n.type_message +"'></textarea>\
               </div>\
             </div>\
           </div>");
@@ -1016,7 +1017,7 @@
         'cancel', 'info', 'choose_stat', 'close_session', 'open_session', 'char_max', 'is_writing', 'alert', 'user_is', 'theme', 'lang',
         'search', 'rm_search', 'main', 'sounds', 'enabled', 'disabled', 'please_wait', 'no_users', 'user_not_found',
         'seconds', 'reconnection', 'try_it', 'length_of', 'must_be_between', 'failed', 'all_fields_required',
-        'validate_username', 'new_messages' ];
+        'validate_username', 'new_messages', 'type_message' ];
 
         for (var i = 0; i < i18n_elem.length; i++) {
           if (i18n[i18n_elem[i]] === undefined || i18n[i18n_elem[i]] === null) {
@@ -1034,6 +1035,7 @@
       $( "#options, #options-panel" ).attr( "title", i18n.options );
       $( "#rerun-select" ).attr( "title", i18n.choose_stat );
       $( "#chat-search-text" ).attr( "placeholder", i18n.search );
+      $( "#textarea_msg" ).attr( "placeholder", i18n.type_message );
       $( "#chat-icon-search" ).attr( "title", i18n.search );
       $( "#chat-icon-close" ).attr( "title", i18n.rm_search );
       $( "#min-main-chat" ).attr( "title", i18n.minimize );
@@ -1344,7 +1346,7 @@
         handle_incoming(message)
       });
 
-      socket.emit('join', { 'user': login_email, 'name': login_name });
+      socket.emit('join', { 'user': user_email, 'name': user_name });
     }
 
     function socket_disconnect () {
@@ -1354,7 +1356,7 @@
 
     function socket_reconnect() {
       socket.socket.reconnect();
-      socket.emit('join', { 'user': login_email, 'name': login_name });
+      socket.emit('join', { 'user': user_email, 'name': user_name });
       chat_reconnect = 0;
     }
 
@@ -1367,6 +1369,7 @@
         var iduser = recv.data.user.uid;
         var name   = recv.data.user.name;
         var status = recv.data.user.status;
+        var avatar = recv.data.user.avatar;
         var msg    = recv.data.msg;
         var main   = $( "#Dialog" + iduser );
 
@@ -1391,7 +1394,7 @@
           main_chat_user_alert( iduser, 0 );
         }
 
-        append_msg_he( msg, main, name, date );
+        append_msg_he( msg, main, name, date, avatar );
       }
 
       else if ( action == 'newuser' ) {
@@ -1436,6 +1439,12 @@
         else
         */
         main_chat_user_status( recv.user.uid, recv.user.status );
+      }
+
+      // Update my setting from backend
+      else if ( action == 'my_settings' ) {
+        user_name = recv.data.name;
+        user_avatar = recv.data.avatar;
       }
 
       else if ( action == 'usrlist' ) {

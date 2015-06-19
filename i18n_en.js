@@ -48,5 +48,6 @@ var i18n =
 	failed:'Can not connect. Check your connection.',
 	all_fields_required:'All form fields are required',
 	validate_username:'Username may consist of a-z, 0-9, underscores, begin with a letter.',
-	new_messages: 'New messages'
+	new_messages: 'New messages',
+	type_message: 'Type new message...'
 };

@@ -1,8 +1,13 @@
 var port = process.env.PORT || 3000;
 server   = require('http').createServer(),
 io       = require('socket.io').listen(server),
-
+crypto   = require('crypto'),
 users = {}, socks = {};
+
+// Avatar config
+//var avatar_url = "http://cdn.libravatar.org/avatar/";
+var avatar_url = "http://www.gravatar.com/avatar/";
+var avatar_404 = ['mm', 'identicon', 'monsterid', 'wavatar', 'retro'];
 
 function Uid() { this.id = ++Uid.lastid; }
 
@@ -32,10 +37,14 @@ io.sockets.on('connection', function (socket) {
 		// Set new uid
 		uid = new Uid();
 		socket.user = recv.user;
+		my_avatar = get_avatar_url(socket.user);
 
 		// Add the new data user
-		users[socket.user] = {'uid': Uid.lastid, 'user': socket.user, 'name': recv.name, 'status': 'online'}
+		users[socket.user] = {'uid': Uid.lastid, 'user': socket.user, 'name': recv.name, 'status': 'online', 'avatar': my_avatar}
 		socks[socket.user] = {'socket': socket}
+
+		// Send to me my own data to get my avatar for example, usefull in future for db things
+		socket.emit('chat', JSON.stringify( { 'action': 'my_settings', 'data': users[socket.user] } ));
 
 		// Send new user is connected to everyone
 		socket.broadcast.emit('chat', JSON.stringify( {'action': 'newuser', 'user': users[socket.user]} ));
@@ -75,3 +84,15 @@ server.listen(port, function () {
   var addr = server.address();
   console.log('jquery-chat server listening and ready');
 });
+
+// Generate url for avatar purpose
+function get_avatar_url(user) {
+	var mymd5 = crypto.createHash('md5').update(user);
+	var rand = random(0, avatar_404.length);
+	var end = '?d=' + avatar_404[rand];
+	return avatar_url + mymd5.digest("hex") + "/" + end
+}
+
+function random(low, high) {
+    return Math.floor(Math.random() * (high - low) + low);
+}
