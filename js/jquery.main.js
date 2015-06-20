@@ -637,14 +637,16 @@
                 var remove_excess = $( this ).val().substr(0, 100);
                 $( this ).val( remove_excess );
               }
-              
+
               //Intro event
               if ( (e.which == 13) && !event.shiftKey ) {
                 var msg = clean_msg ( $( this ).val() );
                 $( this ).val( "" );
                 main.parent().find( "#progressbar-char" ).progressbar( "option", "value", 0 );
-                append_msg_me( msg, main );
-                socket.emit('message', { 'user': user, 'msg': msg });//'user' variable is the destination user
+                socket.emit('message', { 'user': user, 'msg': msg }, function (data) {
+                  var recv = JSON.parse(data);
+                  append_msg_me(msg, main, recv.date);
+                });
               }
               return false;
             });
@@ -711,8 +713,7 @@
     }
 
     // Append my messages
-    function append_msg_me ( msg, main ) {
-      var date = '2015-06-17T00:24:38.365Z';
+    function append_msg_me ( msg, main, date ) {
       var box = main.parent().find(".box-body");
       var me = box.children().last();
 
