@@ -1272,6 +1272,17 @@
         alert( "main_chat_user_alert() unexpected action '" + action + "', please report this" );
     }
 
+    //Disconnect and close
+    function main_chat_shutdown() {
+      /*chat_stat = 0;
+      user_name = '';
+      user_email = '';
+      user_avatar = '';
+      */
+      main_chat_disconnect();
+      chat_reconnect = 0;
+    }
+
     //Disconnect
     function main_chat_disconnect() {
       chat_num_users = 0;
@@ -1313,7 +1324,7 @@
 
       socket.on('custom_error', function ( data ) {
         alert(data.message);
-        //main_chat_disconnect();
+        main_chat_shutdown();
       });
 
       socket.on('disconnect', function ( data ) {
@@ -1336,10 +1347,7 @@
       });
 
       socket.on('connect', function ( data ) {
-        setTimeout(function () {
-          main_chat_title( 0 );
-          main_chat_status( i18n.connected, 'online' );
-        }, 700);
+        console.log('connect');
       });
 
       socket.on('chat', function (recv) {
@@ -1347,7 +1355,23 @@
         handle_incoming(message)
       });
 
-      socket.emit('join', { 'user': user_email, 'name': user_name });
+      chat_join();
+    }
+
+    function chat_join() {
+      socket.emit('join', { 'user': user_email, 'name': user_name }, function (data) {
+        var recv = JSON.parse(data);
+
+        if (recv.login == 'successful') {
+          user_name = recv.my_settings.name;
+          user_avatar = recv.my_settings.avatar;
+
+          setTimeout(function () {
+            main_chat_title( 0 );
+            main_chat_status( i18n.connected, 'online' );
+          }, 700);
+        }
+      });
     }
 
     function socket_disconnect () {
@@ -1357,7 +1381,7 @@
 
     function socket_reconnect() {
       socket.socket.reconnect();
-      socket.emit('join', { 'user': user_email, 'name': user_name });
+      chat_join();
       chat_reconnect = 0;
     }
 
@@ -1443,7 +1467,7 @@
       }
 
       // Update my setting from backend
-      else if ( action == 'my_settings' ) {
+      else if ( action == 'update_settings' ) {
         user_name = recv.data.name;
         user_avatar = recv.data.avatar;
       }
