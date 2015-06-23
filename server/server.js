@@ -17,16 +17,16 @@ Uid.lastid = 0;
 io.sockets.on('connection', function (socket) {
 
 	// Event received by new user
-	socket.on('join', function (recv) {
+	socket.on('join', function (recv, fn) {
 
 		if (!recv.user) {
 			socket.emit('custom_error', { message: 'User not found or invalid' });
 			return;
 		}
 
-		// The user already exists
+		// The user is already logged
 		if (users[recv.user]) {
-			socket.emit('custom_error', { message: 'The user '+ recv.user +' already exists' });
+			socket.emit('custom_error', { message: 'The user '+ recv.user +' is already logged' });
 			return;
 		}
 
@@ -44,16 +44,21 @@ io.sockets.on('connection', function (socket) {
 		socks[socket.user] = {'socket': socket}
 
 		// Send to me my own data to get my avatar for example, usefull in future for db things
-		socket.emit('chat', JSON.stringify( { 'action': 'my_settings', 'data': users[socket.user] } ));
+		//socket.emit('chat', JSON.stringify( { 'action': 'update_settings', 'data': users[socket.user] } ));
 
 		// Send new user is connected to everyone
 		socket.broadcast.emit('chat', JSON.stringify( {'action': 'newuser', 'user': users[socket.user]} ));
+
+		if (typeof fn !== 'undefined')
+			fn(JSON.stringify( {'login': 'successful', 'my_settings': users[socket.user]} ));
 	});
 
 	// Event received when user want change his status
 	socket.on('user_status', function (recv) {
-		users[socket.user].status = recv.status;
-		socket.broadcast.emit('chat', JSON.stringify( {'action': 'user_status', 'user': users[socket.user]} ));
+		if (users[socket.user]) {
+			users[socket.user].status = recv.status;
+			socket.broadcast.emit('chat', JSON.stringify( {'action': 'user_status', 'user': users[socket.user]} ));
+		}
 	});
 
 	// Event received when user is typing
@@ -74,17 +79,18 @@ io.sockets.on('connection', function (socket) {
 
 	// Event received when user has disconnected
 	socket.on('disconnect', function () {
-		socket.broadcast.emit('chat', JSON.stringify( {'action': 'disconnect', 'user': users[socket.user]} ));
-		//socket.broadcast.emit('chat', JSON.stringify( {'action': 'offline', 'user': users[socket.user]} ));
-		delete users[socket.user];
-		delete socks[socket.user];
+		if (users[socket.user]) {
+			socket.broadcast.emit('chat', JSON.stringify( {'action': 'disconnect', 'user': users[socket.user]} ));
+			delete users[socket.user];
+			delete socks[socket.user];
+		}
 	});
 });
 
 //Listen to the server port
 server.listen(port, function () {
   var addr = server.address();
-  console.log('jquery-chat server listening and ready');
+  console.log('jqchat listening on ' + addr.address + addr.port);
 });
 
 // Generate url for avatar purpose
