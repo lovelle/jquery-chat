@@ -715,7 +715,7 @@
     // Append my messages
     function append_msg_me ( msg, main, date ) {
       var box = main.parent().find(".box-body");
-      var me = box.children().last();
+      var me = box.find('.direct-chat-messages').last();
 
       if (me.children().last().attr('id') == 'me') {
         me.children().find('.direct-chat-text').last().append("<div>" + msg + "</div>")
@@ -741,7 +741,7 @@
       var fullname = '';
       var fname = name.split(' ');
       var box = main.parent().find(".box-body");
-      var he = box.children().last();
+      var he = box.find('.direct-chat-messages').last();
 
       if (fname.length == 2) fullname = fname[0] + " " + fname[1];
       else fullname = fname[0];
@@ -1280,7 +1280,6 @@
       user_avatar = '';
       */
       main_chat_disconnect();
-      chat_reconnect = 0;
     }
 
     //Disconnect
