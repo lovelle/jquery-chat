@@ -623,12 +623,12 @@
               var iduser = main.attr( "id" ).substring( ( "Dialog".length ) );
               $( "#user-button-" + iduser ).remove();
             });
-            
+
             var typingTimeout;
             //Textarea send form when key enter is pressed
             $( this ).find( "textarea" ).first().keyup(function( e ) {
 
-              if (typingTimeout != undefined) clearTimeout(typingTimeout);
+              if (typingTimeout !== undefined) clearTimeout(typingTimeout);
               typingTimeout = setTimeout(function() { call_user_is_writing(user) }, 400);
 
               //Progressbar of char in textarea
@@ -642,11 +642,13 @@
               if ( (e.which == 13) && !event.shiftKey ) {
                 var msg = clean_msg ( $( this ).val() );
                 $( this ).val( "" );
-                main.parent().find( "#progressbar-char" ).progressbar( "option", "value", 0 );
-                socket.emit('message', { 'user': user, 'msg': msg }, function (data) {
-                  var recv = JSON.parse(data);
-                  append_msg_me(msg, main, recv.date);
-                });
+                if (msg !== "") {
+                  main.parent().find( "#progressbar-char" ).progressbar( "option", "value", 0 );
+                  socket.emit('message', { 'user': user, 'msg': msg }, function (data) {
+                    var recv = JSON.parse(data);
+                    append_msg_me(msg, main, recv.date);
+                  });
+                }
               }
               return false;
             });
