@@ -618,6 +618,9 @@
               main.dialog( "close" );
             });
 
+            //Fancy scrollbar
+            new_scroll(main.parent().find( ".direct-chat-messages" ));
+
             //Close button
             main.parent().find( ".ui-dialog-titlebar-close" ).click(function() {
               var iduser = main.attr( "id" ).substring( ( "Dialog".length ) );
@@ -658,8 +661,7 @@
           }
 
           //Go to bottom
-          var i = $( this ).parent().find(".box-body").children().last();
-          i[0].scrollTop = i[0].scrollHeight;
+          new_scroll($( this ).parent().find( ".direct-chat-messages" ));
         },
       
         show: {
@@ -718,6 +720,7 @@
     function append_msg_me ( msg, main, date ) {
       var box = main.parent().find(".box-body");
       var me = box.find('.direct-chat-messages').last();
+      var scroll = main.parent().find( ".direct-chat-messages" );
 
       if (me.children().last().attr('id') == 'me') {
         me.children().find('.direct-chat-text').last().append("<div>" + msg + "</div>")
@@ -736,7 +739,7 @@
       };
 
       // Go to bottom
-      me[0].scrollTop = me[0].scrollHeight;
+      new_scroll(scroll);
     }
 
     function append_msg_he ( msg, main, name, date, avatar ) {
@@ -744,6 +747,7 @@
       var fname = name.split(' ');
       var box = main.parent().find(".box-body");
       var he = box.find('.direct-chat-messages').last();
+      var scroll = main.parent().find( ".direct-chat-messages" );
 
       if (fname.length == 2) fullname = fname[0] + " " + fname[1];
       else fullname = fname[0];
@@ -765,7 +769,17 @@
       };
 
       // Go to bottom
-      he[0].scrollTop = he[0].scrollHeight;
+      new_scroll(scroll);
+    }
+
+    function new_scroll(s) {
+      var sint = s.prop('scrollHeight') + 'px';
+      console.log(sint)
+      s.slimScroll({
+        scrollTo : sint,
+        height: 'auto',
+        start: 'bottom'
+      });
     }
 
     //Function for Open chat box
