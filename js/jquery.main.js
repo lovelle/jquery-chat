@@ -582,51 +582,51 @@
 
             //Save the top of dialog
             var main = $( this );
-            var name = $( this ).data( "name" );
+            var name = main.data( "name" );
 
             //Change text for the default lang
-            main_chat_set_dialog_lang( $( this ) );
+            main_chat_set_dialog_lang( main );
 
-            //Boton "Ventana externa"
-            //$( this ).parent().find( ".ui-dialog-titlebar" ).append( "<button class='ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only externally-window' role='button' aria-disabled='false' title='Ventana externa'><span class='ui-icon ui-icon-arrowthick-1-nw'></span><span class='ui-button-text'>Ventana externa</span></button>" );
-            //Boton "minimizar"
-            $( this ).parent().find( ".ui-dialog-titlebar" ).append( "<button class='ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only minimize-window' role='button' aria-disabled='false' title='" + i18n.minimize + "'><span class='ui-icon ui-icon-minus'></span></button>" );
-            //Boton online
-            $( this ).parent().find( ".ui-dialog-title" ).append( "<li id='dialog-status' class='" + $( this ).data( "status" ) + "'>" + name + "</li>" );
+            //Extern window button
+            //main.parent().find( ".ui-dialog-titlebar" ).append( "<button class='ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only externally-window' role='button' aria-disabled='false' title='Ventana externa'><span class='ui-icon ui-icon-arrowthick-1-nw'></span><span class='ui-button-text'>Ventana externa</span></button>" );
+            //Min button
+            main.parent().find( ".ui-dialog-titlebar" ).append( "<button class='ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only minimize-window' role='button' aria-disabled='false' title='" + i18n.minimize + "'><span class='ui-icon ui-icon-minus'></span></button>" );
+            //Status icon
+            main.parent().find( ".ui-dialog-title" ).append( "<li id='dialog-status' class='" + main.data( "status" ) + "'>" + name + "</li>" );
 
             //Set hide 'is writing...'
-            $( this ).parent().find( "#iswriting" ).first().addClass( "no-display" );
+            main.parent().find( "#iswriting" ).first().addClass( "no-display" );
 
             //Change flag at init option
-            $( this ).data( "init", 1 );
+            main.data( "init", 1 );
 
             //Textarea click
-            $( this ).parent().find( "textarea" ).click(function() {
+            main.parent().find( "textarea" ).click(function() {
               main_chat_user_alert( id, 1 );
             });
 
             //Textarea focus fancy in and out
-            $( this ).parent().find( "textarea" ).first().focusin(function() {
-              $( this ).addClass( "ui-chatbox-input-focus" );
+            main.parent().find( "textarea" ).first().focusin(function() {
+              main.addClass( "ui-chatbox-input-focus" );
             });
             $( this ).parent().find( "textarea" ).first().focusout(function() {
-              $( this ).removeClass( "ui-chatbox-input-focus" );
+              main.removeClass( "ui-chatbox-input-focus" );
             });
 
             //Minimize button
-            $( this ).parent().find( ".minimize-window" ).click(function() {
+            main.parent().find( ".minimize-window" ).click(function() {
               main.dialog( "close" );
             });
 
             //Close button
-            $( this ).parent().find( ".ui-dialog-titlebar-close" ).click(function() {
+            main.parent().find( ".ui-dialog-titlebar-close" ).click(function() {
               var iduser = main.attr( "id" ).substring( ( "Dialog".length ) );
               $( "#user-button-" + iduser ).remove();
             });
 
             var typingTimeout;
             //Textarea send form when key enter is pressed
-            $( this ).find( "textarea" ).first().keyup(function( e ) {
+            main.find( "textarea" ).first().keyup(function( e ) {
 
               if (typingTimeout !== undefined) clearTimeout(typingTimeout);
               typingTimeout = setTimeout(function() { call_user_is_writing(user) }, 400);
