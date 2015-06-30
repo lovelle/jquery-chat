@@ -116,7 +116,7 @@
     $( "#tools, #options, #slide-bar, #chat-title-button" ).button();
 
     //Click for expand and collapse
-    $( "#slide-bar" ).click(function() {
+    $( document ).on("click", "#slide-bar", function() {
       $( this ).tipsy( "hide" );
       $( "#main" ).toggleClass( "toolbar toolbar-max" );
       $( "#main-rpanel" ).toggleClass( "window" );
@@ -268,12 +268,12 @@
       });
 
       //Click for open dialog tools menus
-      $( "#tools" ).click(function() {
+      $( document ).on("click", "#tools", function() {
         main_do_dialog ( this, "#tools-panel" );
       });
 
       //Click for open dialog options menus
-      $( "#options" ).click(function() {
+      $( document ).on("click", "#options", function() {
         main_do_dialog ( this, "#options-panel" );
         $( "#options-accordion" ).accordion( "refresh" );
       });
@@ -389,7 +389,7 @@
         }).parent().buttonset();
 
     //Search the user
-    $( "#chat-search-text" ).keyup(function() {
+    $( document ).on("keyup", "#chat-search-text", function() {
       $( this ).val( $( this ).val().replace(/[^A-Za-z ]/g, '') );
       if ( $( this ).val().length >= 2 ) {
         var filter = $( this ).val();
@@ -412,7 +412,7 @@
     });
 
     //Button close search for clean it
-    $( "#chat-icon-close" ).click(function() {
+    $( document ).on("click", "#chat-icon-close", function() {
       $( "#chat-search-text" ).val( "" );
       $( "#main-sort-chat" ).find( "li" ).slideDown().parent().show();
       if ( $( "#no-users-found" ).length > 0 )$( "#no-users-found" ).remove();
@@ -420,7 +420,7 @@
     });
 
     //Bar text button open chat
-    $( "#chat-title-button" ).click(function() {
+    $( document ).on("click", "#chat-title-button", function() {
 
       if ( chat_stat == 0 ) {
         
@@ -473,7 +473,7 @@
               .menu();
     
     //User status
-    $( ".user-status" ).click(function() {
+    $( document ).on("click", ".user-status", function() {
       var id = $( this ).attr( "id" );
       var now = $( "#rerun-img" ).attr( "src" );
       var status, label;
@@ -508,12 +508,12 @@
 
 
     //Minus icon in main chat
-    $( "#min-main-chat" ).click(function() {
+    $( document ).on("click", "#min-main-chat", function() {
       $( "#main-users-resizer" ).hide();
     });
 
     //User status msg
-    $( "#text-status" ).focusin(function() {
+    $( document ).on("focusin", "#text-status", function() {
       if ( text_custom_msg.length < 1 )
         $( this ).val("");
       else
@@ -521,7 +521,7 @@
 
       return false;
     });
-    $( "#text-status" ).focusout(function() {
+    $( document ).on("focusout", "#text-status", function() {
       if ( text_custom_msg.length < 1 )
         $( this ).val( text_status );
       else
@@ -530,8 +530,8 @@
       return false;
     });
 
-    //Si se presiona enter en el campo de mensaje personalizado
-    $( "#text-status" ).keydown(function( e ) {
+    //If enter key is pressed on custom message
+    $( document ).on("keydown", "#text-status", function(e) {
       if ( (e.which == 13) ) {
         if ( $( this ).val().length < 1 ) {
           $( this ).val( text_status );
@@ -774,8 +774,8 @@
 
     function new_scroll(s) {
       var sint = s.prop('scrollHeight') + 'px';
-      console.log(sint)
       s.slimScroll({
+        size: '5px',
         scrollTo : sint,
         height: 'auto',
         start: 'bottom'
@@ -1272,7 +1272,7 @@
           $( "#user-button-" + id ).addClass( "ui-state-error", 500 );  
         }
 
-        //Increment number of new messages not read // caca
+        //Increment number of new messages not read
         main_chat_new_messages(1, main);
 
       } else if (action == 1) {
