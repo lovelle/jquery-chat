@@ -650,6 +650,9 @@
                   socket.emit('message', { 'user': user, 'msg': msg }, function (data) {
                     var recv = JSON.parse(data);
                     append_msg_me(msg, main, recv.date);
+                    // FIXME
+                    // Set dialog position
+                    main.dialog( "option", "position", { my: "right bottom", at: "right top-3", of: "#user-button-"+id, collision: "flip, none" });
                   });
                 }
               }
