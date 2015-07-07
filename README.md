@@ -73,7 +73,7 @@ If you have already loaded jQuery or UI there is no need to include them.
 
 ### 3. Install and run Node.js
 
-	$ cd /var/www/jquery-chat/server
+	$ cd /var/www/jquery-chat/server/node
 	$ npm install
 	$ npm start
 
