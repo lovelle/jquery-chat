@@ -1,0 +1,117 @@
+body {
+    background: #ddd url(../images/bg.png);
+    padding-top: 5%;
+}
+
+h1 {
+    color: #f73b3b;
+}
+
+p {
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 1.5em;
+    color: #555;
+}
+
+.smallc {
+    font-size: 13px;
+    color: #999;
+    font-style: italic;
+}
+
+#logo {
+    background-color: #f73b3b;
+    border-radius: 65px;
+    -moz-border-radius: 65px;
+    -webkit-border-radius: 65px;
+    color: #fff;
+    font-family: 'Lobster', cursive;
+    font-size: 25px;
+    height: 130px;
+    line-height: 130px;
+    margin: 0 auto;
+    text-align: center;
+    width: 130px;
+}
+
+input.input-large {
+    padding: 9px 14px;
+}
+
+div.gradient {
+    background: url(../images/gradient.png) no-repeat top center;
+    min-height: 770px;
+}
+
+div.content {
+    text-align: center;
+    margin-top: 1.5em;
+}
+
+div.star {
+    padding-left: 6.5em;
+    float: center;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.toooltip {
+  font-size: 19px;
+  line-height: 19px;
+  display: inline-block;
+  background: #4B5;
+  color: #fff;
+  padding: 10px 20px 10px 20px;
+  border-radius: 4px;
+  position: relative;
+  left: 50px;
+}
+
+.toooltip:before {
+  content: '';
+  display:inline-block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #4B5; /* 4B5 */
+  position: absolute;
+  bottom: -6px;
+  right: 50%;
+  margin-top: -6px;
+}
+
+
+/* Animation
+---------------------------------- */
+@-webkit-keyframes shake {
+  0%, 100% {
+    -webkit-transform:translate3d(0, 0, 0);
+    transform:translate3d(0, 0, 0);
+  }
+
+  50% {
+    -webkit-transform:translate3d(0, 25px, 0);
+    transform:translate3d(0, 25px, 0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    -webkit-transform:translate3d(0, 0, 0);
+    transform:translate3d(0, 0, 0);
+  }
+
+  50% {
+    -webkit-transform:translate3d(0, 25px, 0);
+    transform:translate3d(0, 25px, 0);
+  }
+}
+
+.shake {
+  -webkit-animation-name:shake;
+  animation-name:shake;
+  -webkit-animation-duration:2s;
+  animation-duration:2s;
+  -webkit-animation-iteration-count: 6;
+  animation-iteration-count: 6;
+}
