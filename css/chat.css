@@ -58,13 +58,14 @@ body {
  	display: inline;
 }
 
+#textarea_msg {
+	height: 42px;
+}
+
 .textarea-msg { 
-	/*padding-top: 0.5em;
-	padding-left: 0.5em;*/
-	font-size: 10px;
-	float: left;
-	width: 190px;
-	height: 40px;
+	width: 100%;
+	display: inline-block;
+	padding: 2px 9px;
 }
 
 .msg, .msg-text {

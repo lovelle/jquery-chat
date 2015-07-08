@@ -1006,7 +1006,7 @@
               </div>\
               <div id='progressbar-char' class='pull-left'></div>\
               <div class='small-box-footer'>\
-                <textarea id='textarea_msg' class='form-control' name='message' placeholder='"+ i18n.type_message +"'></textarea>\
+                <textarea id='textarea_msg' class='form-control textarea-msg' name='message' placeholder='"+ i18n.type_message +"'></textarea>\
               </div>\
             </div>\
           </div>");
@@ -1438,6 +1438,9 @@
         }
 
         append_msg_he( msg, main, name, date, avatar );
+        // FIXME
+        // Set dialog position
+        main.dialog( "option", "position", { my: "right bottom", at: "right top-3", of: "#user-button-"+iduser, collision: "flip, none" });
       }
 
       else if ( action == 'newuser' ) {
