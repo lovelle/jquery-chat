@@ -1,2 +1,4 @@
-server/node_modules/
-server/npm-debug.log
+server/node/node_modules
+server/node/*.log
+server/python/env
+server/python/venv
