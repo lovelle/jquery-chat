@@ -1,0 +1,6 @@
+argparse==1.2.1
+gevent==1.0.2
+gevent-socketio==0.3.6
+gevent-websocket==0.9.5
+greenlet==0.4.7
+wsgiref==0.1.2
