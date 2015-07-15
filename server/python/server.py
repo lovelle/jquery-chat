@@ -99,50 +99,64 @@ class JqChatServer(BaseNamespace, BroadcastMixin):
 		return "%s%s/%s" % (self.avatar_url, mymd5, end)
 
 
-def server(environ, start_response):
-	path = environ['PATH_INFO'].strip('/')
-	content_type = "text/html"
-	response_headers = [
-		('Content-type', content_type),
-		('Server', 'JqChatServer'),
-	]
-
-	if path == 'socket.io/socket.io.js':
-		try:
-			data = open('static/socket.io.js').read()
-		except Exception:
-			return not_found(start_response, response_headers)
-
-		if path.endswith(".js"):
-			response_headers[0] = ('Content-type', "text/javascript")
-
-		response_headers.append(('Content-Length', str(len(data))))
-		start_response('200 OK', response_headers)
-		return iter([data])
-
-	elif path.startswith("socket.io"):
-		try:
-			return socketio_manage(environ, {'': JqChatServer})
-		except Exception, e:
-			return internal_error(start_response, response_headers, e)
-	else:
-		return not_found(start_response, response_headers)
+class Application(object):
+	def __init__(self):
+		self.server = "JqChatServer"
+		self.content_type = "text/html"
+		self.http_ok = '200 OK'
+		self.http_error = '500 Internal Server Error'
+		self.http_not_found = '404 Not Found'
 
 
-def internal_error(start_response, response_headers, error):
-	start_response('500 Internal Server Error', response_headers)
-	return iter(['<h1>Internal Server Error</h1><p>%s</p>' % error])
+	def __call__(self, environ, start_response):
+		self.response_headers = [
+			('Content-type', self.content_type),
+			('Server', self.server),
+		]
+		path = environ['PATH_INFO'].strip('/')
+
+		if path == 'socket.io/socket.io.js':
+			try:
+				data = open('static/socket.io.js').read()
+			except Exception:
+				return self.not_found(start_response)
+
+			if path.endswith(".js"):
+				self.response_headers[0] = ('Content-type', "text/javascript")
+
+			self.response_headers.append(('Content-Length', str(len(data))))
+			start_response(self.http_ok, self.response_headers)
+			return iter([data])
+
+		elif path.startswith("socket.io"):
+			try:
+				return socketio_manage(environ, {'': JqChatServer})
+			except Exception, e:
+				return self.internal_error(start_response, e)
+		elif path == '':
+			return self.index(start_response)
+		else:
+			return self.not_found(start_response)
 
 
-def not_found(start_response, response_headers):
-	start_response('404 Not Found', response_headers)
-	return iter(['<h1>Not Found</h1>'])
+	def internal_error(self, start_response, error):
+		start_response(self.http_error, self.response_headers)
+		return iter(['<h1>Internal Server Error</h1><p>%s</p>' % error])
+
+
+	def not_found(self, start_response):
+		start_response(self.http_not_found, self.response_headers)
+		return iter(['<h1>Not Found</h1>'])
+
+	def index(self, start_response):
+		start_response(self.http_ok, self.response_headers)
+		return iter(['<h1>Hello</h1><p>Welcome to %s</p>' % self.server])
 
 
 if __name__ == '__main__':
 	print 'Listening %s:%s and on port 10843 (flash policy server)' % (HOST, PORT)
 	server = SocketIOServer(
-		(HOST, PORT), server,
+		(HOST, PORT), Application(),
 		resource="socket.io", policy_server=True,
 		policy_listener=(HOST, 10843))
 	server.serve_forever()
