@@ -94,7 +94,7 @@ class JqChatServer(BaseNamespace, BroadcastMixin):
 	def get_avatar_url(self):
 		""" Generate url for avatar purpose """
 		mymd5 = hashlib.md5(self.user).hexdigest()
-		rand = randint(0,len(self.avatar_404)-1)
+		rand = randint(0, len(self.avatar_404)-1)
 		end = '?d=%s' % self.avatar_404[rand]
 		return "%s%s/%s" % (self.avatar_url, mymd5, end)
 
@@ -107,7 +107,6 @@ def server(environ, start_response):
 		('Server', 'JqChatServer'),
 	]
 
-	#if path.startswith('static/'):
 	if path == 'socket.io/socket.io.js':
 		try:
 			data = open('static/socket.io.js').read()
@@ -116,12 +115,12 @@ def server(environ, start_response):
 
 		if path.endswith(".js"):
 			response_headers[0] = ('Content-type', "text/javascript")
-		
+
 		response_headers.append(('Content-Length', str(len(data))))
 		start_response('200 OK', response_headers)
 		return iter([data])
 
-	if path.startswith("socket.io"):
+	elif path.startswith("socket.io"):
 		try:
 			return socketio_manage(environ, {'': JqChatServer})
 		except Exception, e:
@@ -129,9 +128,11 @@ def server(environ, start_response):
 	else:
 		return not_found(start_response, response_headers)
 
+
 def internal_error(start_response, response_headers, error):
 	start_response('500 Internal Server Error', response_headers)
 	return iter(['<h1>Internal Server Error</h1><p>%s</p>' % error])
+
 
 def not_found(start_response, response_headers):
 	start_response('404 Not Found', response_headers)
