@@ -77,7 +77,7 @@ class JqChatServer(BaseNamespace, BroadcastMixin):
 		date = time.strftime('%Y-%m-%dT%H:%M:%S')
 		msgi = recv.get('msg')
 		user = recv.get('user')
-		msgs = dict(msg=msgi, user=self._users[user])
+		msgs = dict(msg=msgi, user=self._users[self.user])
 		self._socks[user].emit('chat', json.dumps(dict(action='message', data=msgs, date=date)))
 		return json.dumps(dict(ack='true', date=date))
 
