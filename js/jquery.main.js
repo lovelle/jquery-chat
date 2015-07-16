@@ -23,6 +23,7 @@
   conf_sound_active,
   conf_login_popup,
   conf_tools_disabled,
+  search_case_sensitive,
   conf_tools_icon,
   conf_options_disabled,
   conf_options_icon,
@@ -98,6 +99,14 @@
     
     //0 chat users at begining
     main_chat_users_num( 2, 0 );
+
+    if (!conf_search_case_sensitive) {
+      jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
+          return function( elem ) {
+              return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+          };
+      });
+    }
     
     //Init state of bar, collapse or expand
     if ( conf_bar_default_expand == false ) {
@@ -1184,6 +1193,7 @@
         conf_sound_active = conf["sound_active"];
         conf_login_popup = conf["login_popup"];
         conf_tools_disabled = conf["tools_disabled"];
+        conf_search_case_sensitive = conf["search_case_sensitive"];
         conf_tools_icon = conf["tools"]["icon"];
         conf_options_disabled = conf["options_disabled"];
         conf_options_icon = conf["options"]["icon"];

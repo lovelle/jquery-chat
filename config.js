@@ -9,6 +9,7 @@ var conf =
     sound_active: true,
     login_popup: true,
     tools_disabled: false,
+    search_case_sensitive: true,
     tools:
     {
         icon: 'ui-icon-wrench'
