@@ -1,6 +1,7 @@
 import sys
 import time
 import json
+import signal
 
 from socketio import socketio_manage
 from socketio.server import SocketIOServer
@@ -152,10 +153,21 @@ class Application(object):
         return iter(['<h1>Hello</h1><p>Welcome to %s</p>' % self.server])
 
 
-if __name__ == '__main__':
-    print 'Listening %s:%s and on port 10843 (flash policy server)' % (HOST, PORT)
+def main():
+    def signal_handler(signal, frame):
+        print "Received signal %s scheduling shutdown..." % signal
+        server.stop()
+
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+    print 'Listening %s:%s and port 10843 (flash policy)' % (HOST, PORT)
     server = SocketIOServer(
         (HOST, PORT), Application(),
         resource="socket.io", policy_server=True,
         policy_listener=(HOST, 10843))
     server.serve_forever()
+
+
+if __name__ == '__main__':
+    main()
