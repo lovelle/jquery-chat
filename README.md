@@ -1,4 +1,5 @@
-# [jquery-chat](http://jquery-chat.net/)
+[jquery-chat](http://jquery-chat.net/)
+===
 
 100% pure javascript realtime chat (client and server) facebook/gmail style web chat.
 
@@ -7,10 +8,13 @@ To see demo please visit [jquery-chat.net](http://jquery-chat.net)
 The jQuery Chat plugin can be used to add a JavaScript-based chatting system to your site, 
 allows webmasters/developers to add a fully-working chat room on top of their site, see 'index.html' as an example.
 
-Built with these components -> [Jquery](http://jquery.com/), [Node.js](http://nodejs.org/), [Socket.IO](http://socket.io/)
+Built with these components -> [Jquery UI](http://jqueryui.com/), [Socket.IO](http://socket.io/)
 
 **Note:** By default the chat is configured to use an existing [Heroku app](http://jquery-chat.herokuapp.com/socket.io), so you will not need to install Node and npm.
 (Skip step 3 in the installation process)
+
+**NEW:** With the last changes we also support *python* server.
+So you could have python server instead [Node.js](http://nodejs.org/) if you want.
 
 
 Features
@@ -26,27 +30,14 @@ Features
 	* Browser support: (Opera, Firefox, Google Chrome, Safari, Internet Explorer)
 
 
-## Usage:
+Usage:
+---
 
-You need to call the next set of scripts in your own site.
-If you have already loaded jQuery or UI there is no need to include them.
-
-```html
-<link id='theme' rel='stylesheet' />
-<link rel='stylesheet' href='css/tipsy.css' />
-<link rel='stylesheet' href='css/chat.css' />
-
-<script src='https://jquery-chat.herokuapp.com/socket.io/socket.io.js'></script>
-<script src='js/jquery-1.11.2.min.js'></script>
-<script src='js/jquery-ui-1.10.4.custom.min.js'></script>
-<script src='js/jquery.tipsy.js'></script>
-<script src='js/jquery.main.js'></script>
-<script src='config.js'></script>
-<script src='i18n_en.js'></script>
-```
+Take a look at *index.html* for simple example of usage.
 
 
-## Getting Started:
+Getting Started:
+---
 
 * [Install](https://docs.npmjs.com/getting-started/installing-node) Node.js and npm
 * Use any Webserver (Apache, IIS, Nginx, Lighttpd, etc)
@@ -54,15 +45,18 @@ If you have already loaded jQuery or UI there is no need to include them.
 **Note:** Remember to clone the project behind a webserver, if you want to execute local file index.html it wont work.
 
 
-## Installation
+Installation
+---
 
-### 1. Clone the project
+1. Clone the project
+---
 
 	$ cd /var/www/
 	$ git clone https://github.com/lovelle/jquery-chat
 	$ cd jquery-chat
 
-### 2. Configuration
+2. Configuration
+---
 
 	# Go to cloned project
 	$ cd /var/www/jquery-chat/
@@ -71,14 +65,15 @@ If you have already loaded jQuery or UI there is no need to include them.
 	# And the same for line 11 in index.html
 	$ editor index.html
 
-### 3. Install and run Node.js
+3. Install and run Server
+---
+	# For **node.js** server follow [these instructions](https://github.com/lovelle/jquery-chat/blob/master/server/node/README.md)
+	# For **python** server follow [these instructions](https://github.com/lovelle/jquery-chat/blob/master/server/python/README.md)
 
-	$ cd /var/www/jquery-chat/server/node
-	$ npm install
-	$ npm start
 
+4. Run
+---
 
-### 4. Run
 Lets it, to finish remember you must have a webserver, if you dont want to install a full webserver you can do it with python server:
 
 	# Go to project folder
@@ -89,6 +84,20 @@ Lets it, to finish remember you must have a webserver, if you dont want to insta
 Finish!, go to visit http://localhost:8000/
 
 
-## License
+Motivation
+---
+This chat is made in my free time for anyone who need a tool like that.
+
+Why there is a python server if all server logic allready exist in Node.js?
+	* For fun.
+	* For anyone who didn't know node.js and wants to understand how server works.
+	* To be more compatibilty friendly.
+
+Will be the server be supported in others languages?
+	* Yep, ASAP.
+
+
+License
+---
 
 See [LICENSE](https://github.com/lovelle/jquery-chat/blob/master/LICENSE).
