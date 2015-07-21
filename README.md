@@ -87,7 +87,8 @@ Finish!, go to visit http://localhost:8000/
 
 Motivation
 ---
-This chat is made in my free time for anyone who need a tool like that.
+This chat was made in my free time, please be gentle.
+For any doubt feel free to create an [issue](https://github.com/lovelle/jquery-chat/issues).
 
 Why there is a python server if all server logic allready exist in Node.js?
 
