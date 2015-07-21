@@ -1,9 +1,6 @@
 python server for jqchat
 ===
 
-Documentation
-===
-
 Installation Process
 ---
 
