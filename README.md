@@ -67,8 +67,10 @@ Installation
 
 3. Install and run Server
 ---
-For **node.js** server follow [these instructions](https://github.com/lovelle/jquery-chat/blob/master/server/node/README.md)
-For **python** server follow [these instructions](https://github.com/lovelle/jquery-chat/blob/master/server/python/README.md)
+
+For **node.js** server follow [these instructions](https://github.com/lovelle/jquery-chat/blob/master/server/node/README.md).
+
+For **python** server follow [these instructions](https://github.com/lovelle/jquery-chat/blob/master/server/python/README.md).
 
 
 4. Run
