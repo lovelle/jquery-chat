@@ -91,13 +91,13 @@ This chat is made in my free time for anyone who need a tool like that.
 
 Why there is a python server if all server logic allready exist in Node.js?
 
-	* For fun.
-	* For anyone who didn't know node.js and wants to understand how server works.
-	* To be more compatibilty friendly.
+* For fun.
+* For anyone who didn't know node.js and wants to understand how server works.
+* To be more compatibilty friendly.
 
 Will be the server be supported in others languages?
 
-	* Yep, ASAP.
+* Yep, ASAP.
 
 
 License
