@@ -39,10 +39,9 @@ Take a look at *index.html* for simple example of usage.
 Getting Started:
 ---
 
-* [Install](https://docs.npmjs.com/getting-started/installing-node) Node.js and npm
-* Use any Webserver (Apache, IIS, Nginx, Lighttpd, etc)
+* Install any Webserver (Apache, IIS, Nginx, Lighttpd, etc)
 
-**Note:** Remember to clone the project behind a webserver, if you want to execute local file index.html it wont work.
+Remember to clone the project behind a webserver, if you want to execute local file index.html it wont work.
 
 
 Installation
