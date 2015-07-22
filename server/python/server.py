@@ -17,8 +17,7 @@ PORT = 3000
 
 class JqChatServer(BaseNamespace, BroadcastMixin):
     _users = {}
-    _socks = {}
-    _uid = 0
+    _socks = {'lastid': 0}
 
     # Avatar config
     avatar_url = "http://www.gravatar.com/avatar/"
@@ -52,8 +51,8 @@ class JqChatServer(BaseNamespace, BroadcastMixin):
                 'chat', json.dumps(dict(action='usrlist', user=self._users)))
 
         self.user = user
-        self._uid = self._uid + 1
-        self._users[self.user] = dict(uid=self._uid, user=user, name=name, status='online', avatar=self.get_avatar_url())
+        self._socks['lastid'] = self._socks['lastid'] + 1
+        self._users[self.user] = dict(uid=self._socks['lastid'], user=user, name=name, status='online', avatar=self.get_avatar_url())
         self._socks[self.user] = self
 
         # Send new user is connected to everyone
