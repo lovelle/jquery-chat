@@ -47,8 +47,7 @@ class JqChatServer(BaseNamespace, BroadcastMixin):
 
         # Get the current list of users in chat
         if len(self._users) > 0:
-            self.emit(
-                'chat', json.dumps(dict(action='usrlist', user=self._users)))
+            self.emit('chat', json.dumps(dict(action='usrlist', user=self._users)))
 
         self.user = user
         self._socks['lastid'] = self._socks['lastid'] + 1
