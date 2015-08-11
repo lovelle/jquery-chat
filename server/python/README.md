@@ -23,7 +23,7 @@ Run the server
 ---
 
 If you want the server to be handled as a full daemon,
-you can user [supervisor](http://supervisord.org/) tool.
+you can use [supervisor](http://supervisord.org/) tool.
 
 	# For get the server running just execute
 	$ python server.py
