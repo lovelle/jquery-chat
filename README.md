@@ -16,6 +16,10 @@ Built with these components -> [Jquery UI](http://jqueryui.com/), [Socket.IO](ht
 **NEW:** With the last changes we also support *python* server.
 So you could have python server instead [Node.js](http://nodejs.org/) if you want.
 
+**Alert:** At this time, the chat only support socket.io version 0.9.x.
+ASAP there is a future plan to support version 1.x of socket.io, please be patient,
+take a look in this [issue](https://github.com/lovelle/jquery-chat/issues/25) if you are interested.
+
 
 Features
 
