@@ -13,7 +13,7 @@ Built with these components -> [Jquery UI](http://jqueryui.com/), [Socket.IO](ht
 **Note:** By default the chat is configured to use an existing [Heroku app](http://jquery-chat.herokuapp.com/socket.io), so you will not need to install Node and npm.
 (Skip step 3 in the installation process)
 
-**NEW:** With the last changes we also support *python* server.
+**NEW:** With the latest changes we also support *python* server.
 So you could have python server instead [Node.js](http://nodejs.org/) if you want.
 
 **Alert:** At this time, the chat only support socket.io version 0.9.x.
