@@ -4,7 +4,7 @@ var conf =
     server_type: 'socket.io',
     server: 'jquery-chat.herokuapp.com',
     port: '80',
-    debug: true,
+    debug: false,
     auto_login: false,
     sound_active: true,
     login_popup: true,
