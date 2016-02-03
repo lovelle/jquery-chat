@@ -11,8 +11,10 @@ redis    = require('redis');
 var avatar_url = "http://www.gravatar.com/avatar/";
 var avatar_404 = ['mm', 'identicon', 'monsterid', 'wavatar', 'retro'];
 
-var socks = {};
-var users_key = "jqchat:users";
+var socks = {},
+users_key = "jqchat:users",
+user_key = "jqchat:user:",
+chat_key = "jqchat:chat:";
 
 function Uid() { this.id = ++Uid.lastid; }
 
@@ -43,7 +45,7 @@ io.sockets.on('connection', function (socket) {
 		// If there is users online, send the list of them
 		r.smembers(users_key, function(err, reply) {
 			if (reply.length > 0) {
-				getAllUsers(reply, function(users) {
+				getAllUsers(r, reply, function(users) {
 					socket.emit('chat', JSON.stringify( { 'action': 'usrlist', 'user': users } ));
 				});
 			}
@@ -57,11 +59,11 @@ io.sockets.on('connection', function (socket) {
 		r.sadd([users_key, socket.user], function(err, reply) {});
 
 		// Add the new data user
-		r.hmset('jqchat:user:' + socket.user, 'uid', Uid.lastid, 'user', socket.user, 'name', recv.name, 'status', 'online', 'avatar', my_avatar);
+		r.hmset(user_key + socket.user, 'uid', Uid.lastid, 'user', socket.user, 'name', recv.name, 'status', 'online', 'avatar', my_avatar);
 		socks[socket.user] = {'socket': socket}
 
 		// Send new user is connected to everyone
-		r.hgetall('jqchat:user:' + socket.user, function(err, data) {
+		r.hgetall(user_key + socket.user, function(err, data) {
 			socket.broadcast.emit('chat', JSON.stringify( {'action': 'newuser', 'user': data} ));
 
 			if (typeof fn !== 'undefined')
@@ -72,8 +74,8 @@ io.sockets.on('connection', function (socket) {
 	// Event received when user want change his status
 	socket.on('user_status', function (recv) {
 		r.sismember(users_key, socket.user, function(err, reply) {
-			r.hset('jqchat:user:' + socket.user, "status", recv.status, function(err, reply) {
-				r.hgetall('jqchat:user:' + socket.user, function(err, data) {
+			r.hset(user_key + socket.user, "status", recv.status, function(err, reply) {
+				r.hgetall(user_key + socket.user, function(err, data) {
 					socket.broadcast.emit('chat', JSON.stringify( {'action': 'user_status', 'user': data} ));
 				});
 			});
@@ -83,21 +85,25 @@ io.sockets.on('connection', function (socket) {
 	// Event received when user is typing
 	socket.on('user_typing', function (recv) {
 		var id = socks[recv.user].socket.id;
-		r.hgetall('jqchat:user:' + socket.user, function(err, data) {
+		r.hgetall(user_key + socket.user, function(err, data) {
 			io.sockets.socket(id).emit('chat', JSON.stringify( {'action': 'user_typing', 'data': data} ));
 		});
 	});
 
 	// Event received when user send message to another
 	socket.on('message', function (recv, fn) {
-		r.hgetall('jqchat:user:' + socket.user, function(err, data) {
-			var d = new Date();
-			var id = socks[recv.user].socket.id;
-			var msg = {'msg': recv.msg, 'user': data};
+		r.hgetall(user_key + socket.user, function(err, data) {
+			var d = new Date(),
+			id = socks[recv.user].socket.id,
+			msg = {'msg': recv.msg, 'user': data},
+			log = {"msg": recv.msg, "date": d },
+			key = chat_key + data.user + "_" + recv.user;
 
-			if (typeof fn !== 'undefined')
-				fn(JSON.stringify( {'ack': 'true', 'date': d} ));
-			io.sockets.socket(id).emit('chat', JSON.stringify( {'action': 'message', 'data': msg, 'date': d} ));
+			r.rpush([key , JSON.stringify(log)], function(err, reply) {
+				if (typeof fn !== 'undefined')
+					fn(JSON.stringify( {'ack': 'true', 'date': d} ));
+				io.sockets.socket(id).emit('chat', JSON.stringify( {'action': 'message', 'data': msg, 'date': d} ));
+			});
 		});
 	});
 
@@ -105,8 +111,8 @@ io.sockets.on('connection', function (socket) {
 	socket.on('disconnect', function () {
 		r.srem([users_key, socket.user], function(err, reply) {
 			if (reply) {
-				r.hgetall('jqchat:user:' + socket.user, function(err, data) {
-					r.del('jqchat:user:' + socket.user, function(err, reply) {
+				r.hgetall(user_key + socket.user, function(err, data) {
+					r.del(user_key + socket.user, function(err, reply) {
 						socket.broadcast.emit('chat', JSON.stringify( {'action': 'disconnect', 'user': data} ));
 						delete socks[socket.user];
 					});
@@ -122,11 +128,11 @@ server.listen(port, function () {
   console.log('jqchat listening on ' + addr.address + addr.port);
 });
 
-function getAllUsers(reply, callback) {
+function getAllUsers(r, reply, callback) {
 	var users = {};
 	for (var i = 0; i < reply.length; i++) {
 		(function(i) {
-			r.hgetall('jqchat:user:' + reply[i], function(err, data) {
+			r.hgetall(user_key + reply[i], function(err, data) {
 				users[data['user']] = data;
 
 				if (i == (reply.length - 1))
