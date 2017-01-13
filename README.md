@@ -65,7 +65,7 @@ Installation
 	$ cd /var/www/jquery-chat/
 	# Adjust personal setting to 'server' ip or dns
 	$ editor config.js
-	# And the same for line 11 in index.html
+	# And the same for line 16 in index.html (the one that connect to heroku)
 	$ editor index.html
 
 3. Install and run Server
