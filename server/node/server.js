@@ -1,8 +1,10 @@
-var port = process.env.PORT || 3000;
-server   = require('http').createServer(),
-io       = require('socket.io').listen(server),
-crypto   = require('crypto'),
-users = {}, socks = {};
+var port = process.env.PORT || 3000,
+    express = require("express"),
+    app = express(),
+    server = require('http').Server(app),
+    io = require("socket.io")(server),
+    crypto = require('crypto'),
+    users = {}, socks = {};
 
 // Avatar config
 //var avatar_url = "http://cdn.libravatar.org/avatar/";
@@ -14,7 +16,7 @@ function Uid() { this.id = ++Uid.lastid; }
 Uid.lastid = 0;
 
 //Handle users
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
 
 	// Event received by new user
 	socket.on('join', function (recv, fn) {
@@ -64,7 +66,7 @@ io.sockets.on('connection', function (socket) {
 	// Event received when user is typing
 	socket.on('user_typing', function (recv) {
 		var id = socks[recv.user].socket.id;
-		io.sockets.socket(id).emit('chat', JSON.stringify( {'action': 'user_typing', 'data': users[socket.user]} ));
+        io.sockets.connected[id].emit('chat', JSON.stringify({'action': 'user_typing', 'data': users[socket.user]}));
 	});
 
 	// Event received when user send message to another
@@ -74,7 +76,7 @@ io.sockets.on('connection', function (socket) {
 		var msg = {'msg': recv.msg, 'user': users[socket.user]};
 		if (typeof fn !== 'undefined')
 			fn(JSON.stringify( {'ack': 'true', 'date': d} ));
-		io.sockets.socket(id).emit('chat', JSON.stringify( {'action': 'message', 'data': msg, 'date': d} ));
+		io.sockets.connected[id].emit('chat', JSON.stringify( {'action': 'message', 'data': msg, 'date': d} ));
 	});
 
 	// Event received when user has disconnected
