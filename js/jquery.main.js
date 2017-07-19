@@ -1329,12 +1329,11 @@
         socket_disconnect();
     }
 
-    function socket_connect() {
-      socket = io.connect( 'http://'+ conf_server , {
-        port: conf_port,
-        'connect timeout': 5000
-      });
-    }
+      function socket_connect() {
+          socket = io.connect('http://' + conf_server + ':' + conf_port, {
+              'connect timeout': 5000
+          });
+      }
 
     function socket_handle() {
 
