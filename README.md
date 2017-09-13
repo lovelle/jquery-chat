@@ -98,7 +98,6 @@ Why there is a python server if all server logic allready exist in Node.js?
 
 * For fun.
 * For anyone who didn't know node.js and wants to understand how server works.
-* To be more compatibilty friendly.
 
 Will be the server be supported in others languages?
 
