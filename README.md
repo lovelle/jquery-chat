@@ -5,6 +5,9 @@
 
 To see demo please visit [jquery-chat.net](http://jquery-chat.net)
 
+**Disclaimer**: This project is no longer maintained, because I do not have anymore time/interest to extend its functionality,
+anyway Pull Requests will be still accepted and merged ASAP.
+
 The jQuery Chat plugin can be used to add a JavaScript-based chatting system to your site, 
 allows webmasters/developers to add a fully-working chat room on top of their site, see 'index.html' as an example.
 
@@ -15,11 +18,6 @@ Built with these components -> [Jquery UI](http://jqueryui.com/), [Socket.IO](ht
 
 **NEW:** With the latest changes we also support *python* server.
 So you could have python server instead [Node.js](http://nodejs.org/) if you want.
-
-**Alert:** At this time, the chat only support socket.io version 0.9.x.
-ASAP there is a future plan to update to version 1.x of socket.io, please be patient,
-take a look in this [issue](https://github.com/lovelle/jquery-chat/issues/25) to see progress.
-
 
 Features
 
